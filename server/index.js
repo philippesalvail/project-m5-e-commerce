@@ -37,7 +37,7 @@ express()
   .get("/items/filter/:category", handleItemsByCategory)
   .get("/items/company/:companyId", handleItemsByCompany)
   .get("/items/", handleAllItems)
-  .get("/items", handleSingleItem)
+  .get("/item/:itemId", handleSingleItem)
 
   .patch("/buy", handlePurchase)
 
