@@ -5,6 +5,7 @@ const initialState = {
 };
 
 export default function ProductDetailReducer(state = initialState, action) {
+
   switch (action.type) {
     case "REQUEST_PRODUCT_DETAIL": {
       return {
