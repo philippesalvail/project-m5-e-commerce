@@ -13,10 +13,12 @@ function App() {
       <GlobalStyles />
       <Router>
         <Header />
-        <Cart />
         <Switch>
           <Route exact path="/">
             <LandingPage />
+          </Route>
+          <Route exact path="/cart">
+            <Cart />
           </Route>
         </Switch>
       </Router>

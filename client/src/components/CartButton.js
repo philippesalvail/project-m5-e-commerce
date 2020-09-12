@@ -5,7 +5,7 @@ const CartButton = styled.button`
   display: block;
   width: 100%;
   border-radius: 12px;
-  background: #ff406e;
+  background: #e1ad01;
   color: white;
   border: none;
   padding: 8px;

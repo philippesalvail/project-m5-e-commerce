@@ -29,7 +29,7 @@ const Cart = () => {
   return (
     <StyledDiv>
       <div style={{ margin: "20px" }}>
-        <StyledH1>Your cart</StyledH1>
+        <h1>Your cart</h1>
 
         <StyledP>{calculateTotalItems(storeItems)} items</StyledP>
       </div>
@@ -72,17 +72,10 @@ const Cart = () => {
 const StyledDiv = styled.div`
   height: 100%;
   width: 360px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  background-color: #401f43;
+  background-color: gainsboro;
+  color: #000;
   overflow-x: hidden;
   padding-top: 20px;
-`;
-
-const StyledH1 = styled.h1`
-  color: #fff;
 `;
 
 const StyledP = styled.p`
