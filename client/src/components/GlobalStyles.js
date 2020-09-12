@@ -11,3 +11,5 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 export default GlobalStyles;
+
+//just for the example
