@@ -23,11 +23,6 @@ function ProductDetails() {
       .catch((err) => dispatch(receiveProductError(err)));
   }, []);
 
-  if (product && company) {
-    console.log("product: ", product);
-    console.log("company: ", company);
-  }
-
   return (
     <>
       {/* {display ? (
