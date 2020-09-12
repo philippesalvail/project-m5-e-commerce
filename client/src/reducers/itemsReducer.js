@@ -7,6 +7,7 @@ const initialState = {
 };
 
 export default function cartReducer(state = initialState, action) {
+  //console.log(action);
   switch (action.type) {
     case "ITEM_LIST_REQUEST":
       return produce(state, (draftState) => {
