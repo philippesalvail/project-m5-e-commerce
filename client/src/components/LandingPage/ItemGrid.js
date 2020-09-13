@@ -18,13 +18,12 @@ const ItemGrid = () => {
 
 const Wrapper = styled.div`
   position: relative;
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   column-gap: 30px;
   row-gap: 30px;
-  margin: 0;
-  width: 65%;
-  left: 0;
+  width: 90%;
 `;
 
 export default ItemGrid;

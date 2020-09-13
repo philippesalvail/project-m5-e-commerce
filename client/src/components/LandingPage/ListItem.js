@@ -42,9 +42,10 @@ const Price = styled.p`
 `;
 
 const ItemImage = styled.img`
-  border-radius: 12px;
-  width: 65%;
-  max-height: 150px;
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
 `;
 
 const Error = styled.p`
