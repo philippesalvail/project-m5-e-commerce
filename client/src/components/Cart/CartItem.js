@@ -45,7 +45,7 @@ const CartItem = ({ item }) => {
             <StyledH3>{item.name}</StyledH3>
             <StyledH4 onClick={() => console.log("remove item")}>x</StyledH4>
           </div>
-          <img src={item.imageSrc} />
+          <img src={item.imageSrc} style={{ margin: "10px" }} />
         </div>
 
         <div
@@ -80,12 +80,13 @@ const StyledDiv = styled.div`
 
 const StyledH3 = styled.h3`
   color: #000;
-  margin: 0;
+  margin: 0 15px 0 0;
 `;
 
 const StyledH4 = styled.h4`
-  color: #fff;
-  margin: 0;
+  color: #000;
+  margin: 0 10px 10px 10px;
+  font-size: 18px;
 
   &:hover {
     cursor: pointer;
