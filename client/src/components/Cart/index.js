@@ -61,63 +61,95 @@ const Cart = () => {
   };
 
   return (
-    <Wrapper>
-      <BagWrapper>
-        <div
-          style={{
-            border: "1px solid red",
-            margin: "20px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
-            width: "100%",
-          }}
-        >
-          <h1>My cart</h1>
+    <PageWrapper>
+      <CartWrapper>
+        <BagWrapper>
+          <BagHeader>
+            <h1>My cart</h1>
 
-          <StyledP>{calculateTotalItems(storeItems)} items</StyledP>
-        </div>
+            <StyledP>{calculateTotalItems(storeItems)} items</StyledP>
+          </BagHeader>
 
-        <div>
-          <ul>
-            {storeItems.map((item) => {
-              return (
-                <li key={item._id} style={{ listStyleType: "none" }}>
-                  <CartItem item={item} />
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </BagWrapper>
+          <BagBody>
+            <CartItemContainer style={{ padding: 0 }}>
+              {storeItems.map((item) => {
+                return (
+                  <ListItem key={item._id}>
+                    <CartItem item={item} />
+                  </ListItem>
+                );
+              })}
+            </CartItemContainer>
+          </BagBody>
+        </BagWrapper>
 
-      <BuyWrapper>
-        <StyledP>Total: {calculateTotalPrice(storeItems)}</StyledP>
-        <CartButton style={{ width: "120px", height: "40px" }}>
-          Purchase
-        </CartButton>
-      </BuyWrapper>
-    </Wrapper>
+        <BuyWrapper>
+          <h2>Total</h2>
+          <StyledP>{calculateTotalPrice(storeItems)}</StyledP>
+          <CartButton style={{ width: "120px", height: "40px" }}>
+            Purchase
+          </CartButton>
+        </BuyWrapper>
+      </CartWrapper>
+    </PageWrapper>
   );
 };
 
-const Wrapper = styled.div`
+const PageWrapper = styled.div`
+  border: 4px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
-  height: 300px;
+  width: 98%;
+  height: 100%;
   color: #000;
   padding-top: 20px;
 `;
 
-const BagWrapper = styled.div``;
+const CartWrapper = styled.div`
+  border: 4px solid red;
+  display: flex;
+  width: 80%;
+  height: 100%;
+`;
+
+const BagWrapper = styled.div`
+  border: 4px solid red;
+  width: 60%;
+  max-height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
+`;
+
+const BagHeader = styled.div`
+  border: 1px solid red;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
+
+const BagBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CartItemContainer = styled.ul`
+  padding: 0;
+`;
+
+const ListItem = styled.li`
+  list-style-type: none;
+`;
 
 const BuyWrapper = styled.div`
+  border: 4px solid green;
   display: flex;
   justify-content: space-around;
-  bottom: 40px;
-  width: 360px;
+  width: 40%;
+  height: 360px;
 `;
 
 const StyledP = styled.p`

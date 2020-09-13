@@ -45,7 +45,7 @@ const CartItem = ({ item }) => {
             <StyledH3>{item.name}</StyledH3>
             <StyledH4 onClick={() => console.log("remove item")}>x</StyledH4>
           </div>
-          <img src={item.imageSrc} />
+          <img src={item.imageSrc} style={{ margin: "10px" }} />
         </div>
 
         <div
