@@ -24,24 +24,34 @@ const CartItem = ({ item }) => {
         style={{
           margin: "0px",
           padding: "0px",
-          border: "1px dashed #b0a2b0",
+          border: "1px solid lightgrey",
         }}
       >
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            padding: "10px 10px 20px 10px",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <StyledH3>{item.title}</StyledH3>
-          <StyledH4 onClick={() => console.log("remove item")}>x</StyledH4>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "10px 10px 20px 10px",
+            }}
+          >
+            <StyledH3>{item.name}</StyledH3>
+            <StyledH4 onClick={() => console.log("remove item")}>x</StyledH4>
+          </div>
+          <img src={item.imageSrc} />
         </div>
 
         <div
           style={{
             display: "flex",
-            background: "#301732",
+            background: "#000",
             margin: "0",
             padding: "0 0 10px 0",
           }}
@@ -58,7 +68,6 @@ const CartItem = ({ item }) => {
           </form>
         </div>
       </div>
-      <div></div>
     </StyledDiv>
   );
 };
@@ -70,7 +79,7 @@ const StyledDiv = styled.div`
 `;
 
 const StyledH3 = styled.h3`
-  color: #fff;
+  color: #000;
   margin: 0;
 `;
 
@@ -90,7 +99,7 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input`
   width: 30px;
-  background: #301732;
+  background: #000;
   border: none;
   border-bottom: 2px solid #fff;
   color: #fff;
