@@ -2,19 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import AddToCartButton from "../AddToCartButton";
+
 const ListItem = ({ item }) => {
   return (
-    <CardLink to={`/item/${item._id}`}>
-      <Wrapper>
+    <Wrapper>
+      <CardLink to={`/item/${item._id}`}>
         <ItemName>{item.name}</ItemName>
         <ItemImage src={item.imageSrc} alt="item.name" />
-        {item.numInStock === 0 ? (
-          <Error>Out of Stock</Error>
-        ) : (
+      </CardLink>
+      {item.numInStock === 0 ? (
+        <Error>Out of Stock</Error>
+      ) : (
+        <>
           <Price>{item.price}</Price>
-        )}
-      </Wrapper>
-    </CardLink>
+          <AddToCartButton itemId={item._id} />
+        </>
+      )}
+    </Wrapper>
   );
 };
 

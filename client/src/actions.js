@@ -17,6 +17,12 @@ export const changeCategoryFilter = (filter) => ({
   filter,
 });
 
+export const addItemToCart = (itemId, quantity) => ({
+  type: "ADD_ITEM",
+  itemId,
+  quantity,
+});
+
 export const requestProductDetail = () => ({
   type: "REQUEST_PRODUCT_DETAIL",
 });
