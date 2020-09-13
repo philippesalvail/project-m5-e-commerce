@@ -2,12 +2,13 @@ import produce from "immer";
 
 const initialState = {
   status: "loading",
+  currentCategory: "medical",
   itemList: null,
   error: null,
 };
 
 export default function itemsReducer(state = initialState, action) {
-  //console.log(action);
+  console.log(action);
   switch (action.type) {
     case "ITEM_LIST_REQUEST":
       return produce(state, (draftState) => {
@@ -24,6 +25,11 @@ export default function itemsReducer(state = initialState, action) {
       return produce(state, (draftState) => {
         draftState.status = "error";
         draftState.error = action.error;
+      });
+    case "CHANGE_FILTER_CATEGORY":
+      return produce(state, (draftState) => {
+        draftState.currentCategory = action.filter;
+        draftState.status = "loading";
       });
 
     default:

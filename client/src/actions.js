@@ -12,6 +12,11 @@ export const receiveItemListError = (error) => ({
   error,
 });
 
+export const changeCategoryFilter = (filter) => ({
+  type: "CHANGE_FILTER_CATEGORY",
+  filter,
+});
+
 export const requestProductDetail = () => ({
   type: "REQUEST_PRODUCT_DETAIL",
 });
