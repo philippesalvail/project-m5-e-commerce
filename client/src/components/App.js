@@ -6,6 +6,7 @@ import GlobalStyles from "./GlobalStyles";
 import Cart from "./Cart/index";
 import Header from "./Header";
 import LandingPage from "./LandingPage";
+import ProductDetails from "./ProductDetails";
 
 function App() {
   return (
@@ -17,8 +18,11 @@ function App() {
           <Route exact path="/">
             <LandingPage />
           </Route>
-          <Route exact path="/cart">
+          <Route path="/cart">
             <Cart />
+          </Route>
+          <Route exact path="/item/:itemId">
+            <ProductDetails />
           </Route>
         </Switch>
       </Router>
