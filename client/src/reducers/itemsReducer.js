@@ -6,7 +6,7 @@ const initialState = {
   error: null,
 };
 
-export default function cartReducer(state = initialState, action) {
+export default function itemsReducer(state = initialState, action) {
   //console.log(action);
   switch (action.type) {
     case "ITEM_LIST_REQUEST":
