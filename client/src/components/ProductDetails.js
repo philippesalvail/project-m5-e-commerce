@@ -218,7 +218,7 @@ const Product = styled.div`
 `;
 
 const Description = styled.div`
-  diplay: flex;
+  display: flex;
   flex-direction: column;
   flex: 3;
 `;
