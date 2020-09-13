@@ -147,7 +147,7 @@ const ListItem = styled.li`
 const BuyWrapper = styled.div`
   border: 4px solid green;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   width: 40%;
   height: 360px;
 `;
