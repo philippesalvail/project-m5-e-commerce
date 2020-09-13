@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import AddToCarButton from "./AddToCartButton";
 
 import {
   requestProductDetail,
@@ -16,18 +17,20 @@ function ProductDetails() {
   const productDetails = useSelector((state) => state.product.currentProduct);
   const companyDetails = useSelector((state) => state.product.currentCompany);
   const productPurchase = useSelector((state) => state.productPurchase);
+  const [quantity, setQuantity] = React.useState(1);
   const dispatch = useDispatch();
 
   const increaseQtyPurchase = () => {
-    if (productPurchase.quantity < productDetails.numInStock) {
-      dispatch(addQtyToPurchase());
+    if (quantity < productDetails.numInStock) {
+      setQuantity(quantity + 1);
     } else {
       return;
     }
   };
+
   const decreaseQtyPurchase = () => {
-    if (productPurchase.quantity > 1) {
-      dispatch(decreaseQtyToPurchase());
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
     } else {
       return;
     }
@@ -85,7 +88,8 @@ function ProductDetails() {
                       </DecrementBtn>
                     </QtySelection>
                     <ButtonWrapper>
-                      <AddButton>Add to Cart</AddButton>
+                      <AddToCarButton itemId={item} quantity={quantity} />
+                      {/* <AddButton>Add to Cart</AddButton> */}
                     </ButtonWrapper>
                   </QtyForm>
                 </QtyAndBackGround>
