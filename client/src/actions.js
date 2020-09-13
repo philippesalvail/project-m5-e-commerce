@@ -24,3 +24,15 @@ export const receiveProductError = (error) => ({
   type: "RECEIVE_PRODUCT_ERROR",
   error,
 });
+
+export const selectProduct = (productID) => ({
+  type: "SELECT_PRODUCT",
+  productID,
+});
+export const addQtyToPurchase = () => ({
+  type: "ADD_QUANTITY_TO_PURCHASE",
+});
+
+export const decreaseQtyToPurchase = () => ({
+  type: "DECREASE_QUANTITY_TO_PURCHASE",
+});
