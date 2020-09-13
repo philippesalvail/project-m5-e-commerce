@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+
 import CartItem from "../Cart/CartItem";
 import CartButton from "../Cart/CartButton";
-import { useSelector } from "react-redux";
 
 const Cart = () => {
   const state = useSelector((state) => state);
@@ -43,11 +44,11 @@ const Cart = () => {
   ];
 
   const calculateTotalItems = (arr) => {
-    let totalItems = 0;
+    let totalItems = arr.length;
 
-    arr.forEach((item) => {
-      totalItems += item.quantity;
-    });
+    // arr.forEach((item) => {
+    //   totalItems += item.quantity;
+    // });
     return totalItems;
   };
 
@@ -55,7 +56,11 @@ const Cart = () => {
     let totalPrice = 0;
 
     arr.forEach((item) => {
-      totalPrice += item.quantity * item.price;
+      const price = Number(item.price.replace(/[^0-9.-]+/g, "")) * 100;
+
+      console.log("price", price);
+
+      totalPrice += price;
     });
     return <span>${totalPrice / 100}</span>;
   };
@@ -84,11 +89,29 @@ const Cart = () => {
         </BagWrapper>
 
         <BuyWrapper>
-          <h2>Total</h2>
-          <StyledP>{calculateTotalPrice(storeItems)}</StyledP>
-          <CartButton style={{ width: "120px", height: "40px" }}>
-            Purchase
-          </CartButton>
+          <h2
+            style={{ borderBottom: "1px solid gainsboro", paddingBottom: 15 }}
+          >
+            Total
+          </h2>
+          <BuyGrid>
+            <h3>Sub-total</h3>
+            <StyledP>{calculateTotalPrice(storeItems)}</StyledP>
+            <h3>Delivery</h3>
+            <StyledP>Free</StyledP>
+          </BuyGrid>
+
+          <ButtonWrapper>
+            <CartButton
+              style={{
+                width: "70%",
+                height: "50px",
+                textTransform: "uppercase",
+              }}
+            >
+              Checkout
+            </CartButton>
+          </ButtonWrapper>
         </BuyWrapper>
       </CartWrapper>
     </PageWrapper>
@@ -96,37 +119,37 @@ const Cart = () => {
 };
 
 const PageWrapper = styled.div`
-  border: 4px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 98%;
   height: 100%;
+  background: gainsboro;
   color: #000;
   padding-top: 20px;
+  margin: 0;
 `;
 
 const CartWrapper = styled.div`
-  border: 4px solid red;
   display: flex;
   width: 80%;
   height: 100%;
 `;
 
 const BagWrapper = styled.div`
-  border: 4px solid red;
   width: 60%;
   max-height: 100vh;
   overflow: hidden;
   overflow-y: scroll;
+  background: #fff;
+  margin: 0 15px 0 0;
 `;
 
 const BagHeader = styled.div`
-  border: 1px solid red;
   margin: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 const BagBody = styled.div`
@@ -145,11 +168,24 @@ const ListItem = styled.li`
 `;
 
 const BuyWrapper = styled.div`
-  border: 4px solid green;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   width: 40%;
-  height: 360px;
+  height: 300px;
+  background: #fff;
+  margin: 0 0 0 15px;
+`;
+
+const BuyGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 25px 0 0 0;
 `;
 
 const StyledP = styled.p`
