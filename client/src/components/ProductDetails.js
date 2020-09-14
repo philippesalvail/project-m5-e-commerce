@@ -41,7 +41,6 @@ function ProductDetails() {
 
   React.useEffect(() => {
     dispatch(requestProductDetail());
-    // let item = 6543;
     fetch(`/item/${item}`)
       .then((response) => response.json())
       .then((jsonObj) => dispatch(receiveProductDetail(jsonObj)))
@@ -72,7 +71,7 @@ function ProductDetails() {
                   <QtyForm>
                     <QtySelection>
                       <QtyLbl>Desired Qty: </QtyLbl>
-                      <QtySelected value={productPurchase.quantity} />
+                      <QtySelected value={quantity} />
                       <IncrementBtn
                         onClick={() => {
                           increaseQtyPurchase();
