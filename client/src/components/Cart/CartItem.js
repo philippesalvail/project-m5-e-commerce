@@ -9,92 +9,86 @@ const CartItem = ({ item }) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    setItemQuantity(item.quantity);
+    item.quantity ? setItemQuantity(item.quantity) : setItemQuantity(1);
   }, [item.quantity]);
 
   const handleUserInput = (e) => {
+    e.preventDefault();
     let input = e.target.value;
     const id = item._id;
-    e.preventDefault();
+
+    setItemQuantity(input);
     dispatch(updateCartItemQty(id, input));
   };
 
   return (
-    <StyledDiv>
-      <div
-        style={{
-          margin: "0px",
-          padding: "0px",
-          border: "1px solid lightgrey",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: "10px 10px 20px 10px",
-            }}
-          >
-            <StyledH3>{item.name}</StyledH3>
-            <StyledH4
-              onClick={(ev) => {
-                ev.stopPropagation();
-                console.log("id", item._id);
-                dispatch(removeCartItem(item._id));
-              }}
-            >
-              x
-            </StyledH4>
-          </div>
-          <img src={item.imageSrc} style={{ margin: "10px" }} />
-        </div>
+    <CartItemWrapper>
+      <ImgWrapper>
+        <CartItemImg src={item.imageSrc} />
+      </ImgWrapper>
 
-        <div
-          style={{
-            display: "flex",
-            background: "#000",
-            margin: "0",
-            padding: "0 0 10px 0",
-          }}
-        >
+      <div style={{ margin: "10px" }}>
+        <ItemName>{item.name}</ItemName>
+        <FormWrapper>
           <form style={{ marginTop: "10px" }}>
-            <StyledLabel htmlFor="fname">Quantity:</StyledLabel>
+            <StyledLabel htmlFor="quantity">Qty:</StyledLabel>
             <StyledInput
               type="text"
-              id="fname"
-              name="fname"
-              value={itemQuantity}
+              id="quantity"
+              name="quantity"
+              defaultValue={itemQuantity}
               onChange={handleUserInput}
             />
           </form>
-        </div>
+        </FormWrapper>
       </div>
-    </StyledDiv>
+
+      <div style={{ margin: 0 }}>
+        <CloseButton
+          onClick={(ev) => {
+            ev.stopPropagation();
+            console.log("id", item._id);
+            dispatch(removeCartItem(item._id));
+          }}
+        >
+          x
+        </CloseButton>
+      </div>
+    </CartItemWrapper>
   );
 };
 
-const StyledDiv = styled.div`
+const CartItemWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  margin: 20px;
+  justify-content: space-around;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 1px solid gainsboro;
 `;
 
-const StyledH3 = styled.h3`
+const ImgWrapper = styled.div`
+  margin: 10px;
+`;
+
+const CartItemImg = styled.img`
+  width: 100px;
+`;
+
+const FormWrapper = styled.div`
+  display: flex;
+  margin: 0;
+  padding: 0 0 10px 0;
+`;
+
+const ItemName = styled.h3`
   color: #000;
   margin: 0 15px 0 0;
 `;
 
-const StyledH4 = styled.h4`
+const CloseButton = styled.h4`
   color: #000;
   margin: 0 10px 10px 10px;
+  padding: 0;
   font-size: 18px;
 
   &:hover {
@@ -104,15 +98,14 @@ const StyledH4 = styled.h4`
 
 const StyledLabel = styled.label`
   color: #b0a2b0;
-  padding: 0 0 10px 10px;
+  padding: 0 10px 0 0;
 `;
 
 const StyledInput = styled.input`
   width: 30px;
-  background: #000;
   border: none;
-  border-bottom: 2px solid #fff;
-  color: #fff;
+  border-bottom: 2px solid lightgrey;
+  color: #000;
   font-weight: bold;
   text-align: center;
 `;

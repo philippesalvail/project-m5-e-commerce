@@ -8,13 +8,17 @@ import { getCartItemArray } from "../../reducers/cartReducer";
 
 const Cart = () => {
   const cartItems = useSelector(getCartItemArray);
-  console.log("cart items array", cartItems);
+  console.log("cartItems from Cart", cartItems);
+
+  let totalItems = 0;
 
   const calculateTotalItems = (arr) => {
-    let totalItems = arr.length;
-
     arr.forEach((item) => {
-      totalItems += item.quantity;
+      if (item.quantity) {
+        totalItems += item.quantity;
+      } else {
+        totalItems++;
+      }
     });
     return totalItems;
   };
@@ -24,8 +28,13 @@ const Cart = () => {
 
     if (arr.length > 0) {
       arr.forEach((item) => {
-        const price = Number(item.price.replace(/[^0-9.-]+/g, "")) * 100;
-        totalPrice += price;
+        const itemPrice = Number(item.price.replace(/[^0-9.-]+/g, "")) * 100;
+
+        if (item.quantity) {
+          totalPrice += itemPrice * item.quantity;
+        } else {
+          totalPrice += itemPrice;
+        }
       });
     }
 
@@ -131,7 +140,7 @@ const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 98%;
+  width: 90%;
   min-height: 380px;
   height: 100%;
   background: gainsboro;
