@@ -10,8 +10,6 @@ import {
   receiveProductDetail,
   receiveProductError,
   selectProduct,
-  addQtyToPurchase,
-  decreaseQtyToPurchase,
 } from "../actions";
 
 function ProductDetails() {
@@ -63,48 +61,58 @@ function ProductDetails() {
                 <Price>{productDetails.price}</Price>
               </NameAndPrice>
               <Item>
-                <QtyAndBackGround>
-                  <QtyWrapper>
-                    <QtyLbl>Quantity Remaining: </QtyLbl>
-                    <QtyRemaining>{productDetails.numInStock}</QtyRemaining>
-                  </QtyWrapper>
-                  <QtyForm>
-                    <QtySelection>
-                      <QtyLbl>Desired Qty: </QtyLbl>
-                      <QtySelected value={quantity} />
-                      <IncrementBtn
-                        onClick={() => {
-                          increaseQtyPurchase();
-                        }}
-                      >
-                        +
-                      </IncrementBtn>
-                      <DecrementBtn
-                        onClick={() => {
-                          decreaseQtyPurchase();
-                        }}
-                      >
-                        -
-                      </DecrementBtn>
-                    </QtySelection>
-                    <ButtonWrapper>
-                      <AddToCarButton itemId={item} quantity={quantity} />
-                    </ButtonWrapper>
-                  </QtyForm>
-                </QtyAndBackGround>
+                {productDetails.numInStock == 0 ? (
+                  <OutOfStockLbl>Out Of Stock</OutOfStockLbl>
+                ) : (
+                  <QtyAndBackGround>
+                    {productDetails.numInStock <= 2 &&
+                    productDetails.numInStock > 0 ? (
+                      <QtyWrapper>
+                        <QtyRemaining>
+                          Only {productDetails.numInStock} Remaining!!
+                        </QtyRemaining>
+                      </QtyWrapper>
+                    ) : (
+                      <></>
+                    )}
+
+                    <QtyForm>
+                      <QtySelection>
+                        <QtyLbl>Desired Qty: </QtyLbl>
+                        <DecrementBtn
+                          onClick={() => {
+                            decreaseQtyPurchase();
+                          }}
+                        >
+                          -
+                        </DecrementBtn>
+                        <QtySelected value={quantity} />
+                        <IncrementBtn
+                          onClick={() => {
+                            increaseQtyPurchase();
+                          }}
+                        >
+                          +
+                        </IncrementBtn>
+                      </QtySelection>
+                      <ButtonWrapper>
+                        <AddToCarButton itemId={item} quantity={quantity} />
+                      </ButtonWrapper>
+                    </QtyForm>
+                  </QtyAndBackGround>
+                )}
               </Item>
               <CompanyDetails>
-                <NameLbl>Designed by: {companyDetails.name}</NameLbl>
-                <CountryLbl>Made in: {companyDetails.country}</CountryLbl>
+                <NameLbl>
+                  Designed by:{" "}
+                  <WebSite href={companyDetails.url} target="_blank">
+                    {companyDetails.name}
+                  </WebSite>{" "}
+                </NameLbl>
               </CompanyDetails>
               <Wrapper>
                 <WornLbl>Worn on: {productDetails.body_location}</WornLbl>
-                <WebsiteWrapper>
-                  <WebsiteLbl>To Visit Company Website: </WebsiteLbl>
-                  <WebSite href={companyDetails.url} target="_blank">
-                    Click Here
-                  </WebSite>
-                </WebsiteWrapper>
+                <CountryLbl>Made in: {companyDetails.country}</CountryLbl>
               </Wrapper>
             </Description>
           </Product>
@@ -118,6 +126,11 @@ function ProductDetails() {
     </>
   );
 }
+
+const OutOfStockLbl = styled.div`
+  color: red;
+  font-size: 1.25em;
+`;
 
 const BackContainer = styled.div`
   margin-top: 3%;
@@ -156,7 +169,7 @@ const PurchaseWrapper = styled.div`
 
 const QtyWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 `;
 
 const QtyForm = styled.div`
@@ -221,14 +234,14 @@ const NameLbl = styled.p`
 const WornLbl = styled.p`
   font-size: 20px;
   text-align: center;
-  margin: 0;
 `;
 const CountryLbl = styled.p`
   font-size: 20px;
 `;
 
 const QtyRemaining = styled.label`
-  font-size: 20px;
+  color: red;
+  font-size: 1.25em;
 `;
 
 const QtyAndBackGround = styled.div``;
