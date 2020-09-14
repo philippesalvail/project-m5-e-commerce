@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import AddToCarButton from "./AddToCartButton";
+import { NavLink } from "react-router-dom";
 
 import {
   requestProductDetail,
@@ -53,7 +54,7 @@ function ProductDetails() {
   return (
     <>
       {productDetails && companyDetails && productPurchase ? (
-        <div>
+        <DetailPage>
           <Product>
             <Img src={productDetails.imageSrc} />
             <Description>
@@ -89,7 +90,6 @@ function ProductDetails() {
                     </QtySelection>
                     <ButtonWrapper>
                       <AddToCarButton itemId={item} quantity={quantity} />
-                      {/* <AddButton>Add to Cart</AddButton> */}
                     </ButtonWrapper>
                   </QtyForm>
                 </QtyAndBackGround>
@@ -109,13 +109,38 @@ function ProductDetails() {
               </Wrapper>
             </Description>
           </Product>
-        </div>
+          <BackContainer>
+            <BackLink to={`/`}>Return to Main Page</BackLink>
+          </BackContainer>
+        </DetailPage>
       ) : (
         <div>Loading</div>
       )}
     </>
   );
 }
+
+const BackContainer = styled.div`
+  margin-top: 3%;
+  text-align: center;
+`;
+
+const BackLink = styled(NavLink)`
+  text-decoration: none;
+  font-size: 1.5em;
+  text-align: center;
+  &: hover {
+    background-color: lightgreen;
+    padding: 2%;
+    border-radius: 25px;
+    color: #ff4500;
+  }
+`;
+
+const DetailPage = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const IncrementBtn = styled.button``;
 
