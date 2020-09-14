@@ -59,7 +59,7 @@ export const removeCartItem = (id) => ({
   id,
 });
 
-export const updateCartItemQtv = (id, input) => ({
+export const updateCartItemQty = (id, input) => ({
   type: "UPDATE_CART_ITEM_QUANTITY",
   id,
   input,

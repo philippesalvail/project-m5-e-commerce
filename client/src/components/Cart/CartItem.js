@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { removeCartItem, updateCartItemQty } from "../../actions";
 
 const CartItem = ({ item }) => {
   const [itemQuantity, setItemQuantity] = React.useState(item.quantity);
@@ -13,9 +14,9 @@ const CartItem = ({ item }) => {
 
   const handleUserInput = (e) => {
     let input = e.target.value;
-    const id = item.id;
+    const id = item._id;
     e.preventDefault();
-    dispatch(console.log("remove item"));
+    dispatch(updateCartItemQty(id, input));
   };
 
   return (
@@ -43,7 +44,15 @@ const CartItem = ({ item }) => {
             }}
           >
             <StyledH3>{item.name}</StyledH3>
-            <StyledH4 onClick={() => console.log("remove item")}>x</StyledH4>
+            <StyledH4
+              onClick={(ev) => {
+                ev.stopPropagation();
+                console.log("id", item._id);
+                dispatch(removeCartItem(item._id));
+              }}
+            >
+              x
+            </StyledH4>
           </div>
           <img src={item.imageSrc} style={{ margin: "10px" }} />
         </div>
