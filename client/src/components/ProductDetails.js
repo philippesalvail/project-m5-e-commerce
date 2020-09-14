@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import {
   requestProductDetail,
@@ -32,9 +33,11 @@ function ProductDetails() {
     }
   };
 
+  const item = useParams().itemId;
+
   React.useEffect(() => {
     dispatch(requestProductDetail());
-    let item = 6543;
+    // let item = 6543;
     fetch(`/item/${item}`)
       .then((response) => response.json())
       .then((jsonObj) => dispatch(receiveProductDetail(jsonObj)))
@@ -215,7 +218,7 @@ const Product = styled.div`
 `;
 
 const Description = styled.div`
-  diplay: flex;
+  display: flex;
   flex-direction: column;
   flex: 3;
 `;

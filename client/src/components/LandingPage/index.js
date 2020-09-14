@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
 import ItemGrid from "./ItemGrid";
+import NavBar from "./NavBar";
 import FilterSelector from "./FilterSelector";
 
 import {
@@ -13,27 +14,26 @@ import {
 
 const LandingPage = () => {
   const dispatch = useDispatch();
-  const { status, error } = useSelector((state) => state.items);
+  const { status, error, currentCategory } = useSelector(
+    (state) => state.items
+  );
 
   React.useEffect(() => {
     dispatch(requestItemList());
 
-    fetch("/items/")
+    fetch(`/items/filter/${currentCategory}/`)
       .then((res) => res.json())
       .then((itemList) => dispatch(receiveItemList(itemList)));
-  }, []);
+  }, [currentCategory]);
 
-  if (status === "loading") {
-    return "loading...";
-  }
   if (status === "error") {
     return { error };
   }
 
   return (
     <Wrapper>
-      <FilterSelector />
-      <ItemGrid />
+      <NavBar />
+      {status === "loading" ? "loading..." : <ItemGrid />}
     </Wrapper>
   );
 };
