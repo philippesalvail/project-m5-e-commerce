@@ -36,3 +36,35 @@ export const addQtyToPurchase = () => ({
 export const decreaseQtyToPurchase = () => ({
   type: "DECREASE_QUANTITY_TO_PURCHASE",
 });
+
+// CART ACTIONS
+export const addCartItem = (cartItem) => ({
+  type: "ADD_CART_ITEM",
+  cartItem,
+});
+
+export const removeCartItem = (id) => ({
+  type: "REMOVE_CART_ITEM",
+  id,
+});
+
+export const updateCartItemQtv = (id, input) => ({
+  type: "UPDATE_CART_ITEM_QUANTITY",
+  id,
+  input,
+});
+
+export const purchaseCartItemsRequest = (cartItems) => ({
+  type: "PURCHASE_CART_ITEMS_REQUEST",
+  cartItems,
+});
+
+export const purchaseCartItemsReceive = (cartItems) => ({
+  type: "PURCHASE_CART_ITEMS_RECEIVE",
+  cartItems,
+});
+
+export const purchaseCartItemsError = (cartItems) => ({
+  type: "PURCHASE_CART_ITEMS_ERROR",
+  cartItems,
+});

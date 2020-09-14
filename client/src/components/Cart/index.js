@@ -32,6 +32,31 @@ const Cart = () => {
     return <span>${totalPrice / 100}</span>;
   };
 
+  const handleBuy = (event) => {
+    event.preventDefault();
+
+    fetch("/buy", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cartItems),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Something went wrong");
+        }
+      })
+      .then((data) => {
+        // dispatch(purchaseCartItems(cartItems));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
     <PageWrapper>
       <CartWrapper>
@@ -91,6 +116,7 @@ const Cart = () => {
                 height: "50px",
                 textTransform: "uppercase",
               }}
+              onClick={handleBuy}
             >
               Checkout
             </CartButton>
