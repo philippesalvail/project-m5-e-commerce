@@ -96,7 +96,10 @@ function ProductDetails() {
                         </IncrementBtn>
                       </QtySelection>
                       <ButtonWrapper>
-                        <AddToCarButton itemId={item} quantity={quantity} />
+                        <AddToCarButton
+                          item={productDetails}
+                          quantity={quantity}
+                        />
                       </ButtonWrapper>
                     </QtyForm>
                   </QtyAndBackGround>
@@ -141,7 +144,7 @@ const BackLink = styled(NavLink)`
   text-decoration: none;
   font-size: 1.5em;
   text-align: center;
-  &: hover {
+  &:hover {
     background-color: lightgreen;
     padding: 2%;
     border-radius: 25px;

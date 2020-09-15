@@ -5,18 +5,25 @@ import { useSelector } from "react-redux";
 import { IconContext } from "react-icons";
 import { GrCart } from "react-icons/gr";
 
+import { getCartItemArray } from "../../reducers/cartReducer";
+
 const CartButton = () => {
-  //here I need to connect to the cart state when it's up
-  // const amountInCart = useSelector((state) => state.cart.numInCart
-  //
-  // )
+  const cartItemArray = useSelector(getCartItemArray);
+
+  const badgeContent =
+    cartItemArray.length === 0 ? "" : `${cartItemArray.length}`;
+
+  // console.log(badgeContent);
   return (
     <Wrapper to={"/cart"}>
       <IconContext.Provider value={{ size: "35px" }}>
         <div>
-          <CartIcon />
+          <CartIcon></CartIcon>
         </div>
       </IconContext.Provider>
+      {cartItemArray.length !== 0 && (
+        <CartBadge>{cartItemArray.length}</CartBadge>
+      )}
     </Wrapper>
   );
 };
@@ -30,8 +37,8 @@ const Wrapper = styled(Link)`
   border-radius: 5px;
   border: 1px black solid;
 
-  & :before {
-    content: "1";
+  /* & :before {
+    content: "";
     position: absolute;
     top: -12px;
     right: -12px;
@@ -42,9 +49,22 @@ const Wrapper = styled(Link)`
     border-radius: 50%;
     background-color: red;
     color: white;
-  }
+  } */
 `;
 
 const CartIcon = styled(GrCart)``;
+
+const CartBadge = styled.div`
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  height: 25px;
+  width: 25px;
+  font-size: 17px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+`;
 
 export default CartButton;

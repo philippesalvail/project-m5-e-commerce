@@ -2,16 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 
-import { addItemToCart } from "../actions";
+import { addCartItem } from "../actions";
 
-const AddToCartButton = ({ itemId, quantity = 1 }) => {
+const AddToCartButton = ({ item, quantity = 1 }) => {
   const dispatch = useDispatch();
 
   return (
     <Wrapper
       onClick={(ev) => {
         ev.stopPropagation();
-        dispatch(addItemToCart(itemId, quantity));
+        dispatch(
+          addCartItem({
+            ...item,
+            quantity: quantity,
+          })
+        );
       }}
     >
       Add To Cart
