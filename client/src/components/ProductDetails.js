@@ -96,7 +96,10 @@ function ProductDetails() {
                         </IncrementBtn>
                       </QtySelection>
                       <ButtonWrapper>
-                        <AddToCarButton itemId={item} quantity={quantity} />
+                        <AddToCarButton
+                          item={productDetails}
+                          quantity={quantity}
+                        />
                       </ButtonWrapper>
                     </QtyForm>
                   </QtyAndBackGround>
