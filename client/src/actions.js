@@ -65,17 +65,21 @@ export const updateCartItemQty = (id, input) => ({
   input,
 });
 
-export const purchaseCartItemsRequest = (cartItems) => ({
+export const clearCart = () => ({
+  type: "CLEAR_CART",
+});
+
+// PURCHASE ACTIONS
+
+export const purchaseCartItemsRequest = () => ({
   type: "PURCHASE_CART_ITEMS_REQUEST",
-  cartItems,
 });
 
-export const purchaseCartItemsReceive = (cartItems) => ({
+export const purchaseCartItemsReceive = () => ({
   type: "PURCHASE_CART_ITEMS_RECEIVE",
-  cartItems,
 });
 
-export const purchaseCartItemsError = (cartItems) => ({
+export const purchaseCartItemsError = (error) => ({
   type: "PURCHASE_CART_ITEMS_ERROR",
-  cartItems,
+  error,
 });

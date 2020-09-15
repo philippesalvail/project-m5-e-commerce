@@ -1,14 +1,22 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import CartItem from "../Cart/CartItem";
 import CartButton from "../Cart/CartButton";
 import { getCartItemArray } from "../../reducers/cartReducer";
+import {
+  purchaseCartItemsRequest,
+  purchaseCartItemsReceive,
+  purchaseCartItemsError,
+  clearCart,
+} from "../../actions";
 
 const Cart = () => {
   const cartItems = useSelector(getCartItemArray);
-  console.log("cartItems from Cart", cartItems);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   let totalItems = 0;
 
@@ -37,19 +45,24 @@ const Cart = () => {
         }
       });
     }
-
-    return <span>${totalPrice / 100}</span>;
+    return <span>${totalPrice.toFixed(2) / 100}</span>;
   };
 
-  const handleBuy = (event) => {
+  const handlePurchase = (event) => {
     event.preventDefault();
+    dispatch(purchaseCartItemsRequest());
+
+    let arr = [];
+    cartItems.forEach((item) => {
+      arr.push({ [item._id]: item.quantity });
+    });
 
     fetch("/buy", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(cartItems),
+      body: JSON.stringify(arr),
     })
       .then((response) => {
         if (response.ok) {
@@ -59,10 +72,14 @@ const Cart = () => {
         }
       })
       .then((data) => {
-        // dispatch(purchaseCartItems(cartItems));
+        console.log("data", data);
+        dispatch(purchaseCartItemsReceive());
+        dispatch(clearCart());
+        // history.push("/");
       })
       .catch((error) => {
         console.error("Error:", error);
+        dispatch(purchaseCartItemsError(error));
       });
   };
 
@@ -125,7 +142,7 @@ const Cart = () => {
                 height: "50px",
                 textTransform: "uppercase",
               }}
-              onClick={handleBuy}
+              onClick={handlePurchase}
             >
               Checkout
             </CartButton>
