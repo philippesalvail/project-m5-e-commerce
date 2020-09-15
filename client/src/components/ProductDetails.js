@@ -141,7 +141,7 @@ const BackLink = styled(NavLink)`
   text-decoration: none;
   font-size: 1.5em;
   text-align: center;
-  &: hover {
+  &:hover {
     background-color: lightgreen;
     padding: 2%;
     border-radius: 25px;
