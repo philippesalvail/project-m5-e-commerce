@@ -16,7 +16,7 @@ const ListItem = ({ item }) => {
       ) : (
         <>
           <Price>{item.price}</Price>
-          <AddToCartButton itemId={item._id} />
+          <AddToCartButton item={item} />
         </>
       )}
     </Wrapper>

@@ -13,7 +13,7 @@ const CartButton = () => {
   const badgeContent =
     cartItemArray.length === 0 ? "" : `${cartItemArray.length}`;
 
-  console.log(badgeContent);
+  // console.log(badgeContent);
   return (
     <Wrapper to={"/cart"}>
       <IconContext.Provider value={{ size: "35px" }}>
