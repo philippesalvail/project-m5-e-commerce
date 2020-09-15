@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import CartItem from "../Cart/CartItem";
 import CartButton from "../Cart/CartButton";
@@ -15,6 +16,7 @@ import {
 const Cart = () => {
   const cartItems = useSelector(getCartItemArray);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   let totalItems = 0;
 
@@ -52,9 +54,8 @@ const Cart = () => {
 
     let arr = [];
     cartItems.forEach((item) => {
-      arr.push({ [item._id]: [item.quantity] });
+      arr.push({ [item._id]: item.quantity });
     });
-    console.log("array***", arr);
 
     fetch("/buy", {
       method: "PATCH",
@@ -74,6 +75,7 @@ const Cart = () => {
         console.log("data", data);
         dispatch(purchaseCartItemsReceive());
         dispatch(clearCart());
+        // history.push("/");
       })
       .catch((error) => {
         console.error("Error:", error);
