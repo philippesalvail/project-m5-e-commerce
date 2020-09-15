@@ -43,8 +43,7 @@ const Cart = () => {
         }
       });
     }
-
-    return <span>${totalPrice / 100}</span>;
+    return <span>${totalPrice.toFixed(2) / 100}</span>;
   };
 
   const handlePurchase = (event) => {
