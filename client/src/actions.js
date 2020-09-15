@@ -65,6 +65,10 @@ export const updateCartItemQty = (id, input) => ({
   input,
 });
 
+export const clearCart = () => ({
+  type: "CLEAR_CART",
+});
+
 // PURCHASE ACTIONS
 
 export const purchaseCartItemsRequest = () => ({

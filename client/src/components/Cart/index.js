@@ -9,6 +9,7 @@ import {
   purchaseCartItemsRequest,
   purchaseCartItemsReceive,
   purchaseCartItemsError,
+  clearCart,
 } from "../../actions";
 
 const Cart = () => {
@@ -61,7 +62,7 @@ const Cart = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(cartItems),
+      body: JSON.stringify(arr),
     })
       .then((response) => {
         if (response.ok) {
@@ -72,7 +73,8 @@ const Cart = () => {
       })
       .then((data) => {
         console.log("data", data);
-        dispatch(purchaseCartItemsReceive(cartItems));
+        dispatch(purchaseCartItemsReceive());
+        dispatch(clearCart());
       })
       .catch((error) => {
         console.error("Error:", error);
