@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import ItemGrid from "./ItemGrid";
 import NavBar from "./NavBar";
-import FilterSelector from "./FilterSelector";
+import LoadingSpinner from "../LoadingSpinner";
 
 import {
   requestItemList,
@@ -33,7 +33,7 @@ const LandingPage = () => {
   return (
     <Wrapper>
       <NavBar />
-      {status === "loading" ? "loading..." : <ItemGrid />}
+      {status === "loading" ? <LoadingSpinner size={"50px"} /> : <ItemGrid />}
     </Wrapper>
   );
 };
