@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import AddToCarButton from "./AddToCartButton";
+import CheaperItemsDisplay from "./CheaperItemsDisplay";
 import { NavLink } from "react-router-dom";
 
 import {
@@ -13,6 +14,7 @@ import {
 } from "../actions";
 
 function ProductDetails() {
+  const item = useParams().itemId;
   const productDetails = useSelector((state) => state.product.currentProduct);
   const companyDetails = useSelector((state) => state.product.currentCompany);
   const productPurchase = useSelector((state) => state.productPurchase);
@@ -35,8 +37,6 @@ function ProductDetails() {
     }
   };
 
-  const item = useParams().itemId;
-
   React.useEffect(() => {
     dispatch(requestProductDetail());
     fetch(`/item/${item}`)
@@ -46,7 +46,7 @@ function ProductDetails() {
         dispatch(selectProduct(product.detail.itemDetails._id))
       )
       .catch((err) => dispatch(receiveProductError(err)));
-  }, []);
+  }, [item]);
 
   return (
     <>
@@ -119,6 +119,7 @@ function ProductDetails() {
               </Wrapper>
             </Description>
           </Product>
+          <CheaperItemsDisplay itemId={item} />
           <BackContainer>
             <BackLink to={`/`}>Return to Main Page</BackLink>
           </BackContainer>
@@ -165,10 +166,6 @@ const QtySelected = styled.input`
   text-align: center;
   width: 5%;
 `;
-const PurchaseWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 
 const QtyWrapper = styled.div`
   display: flex;
@@ -183,14 +180,6 @@ const QtyForm = styled.div`
 
 const ButtonWrapper = styled.div``;
 
-const BackButton = styled.button``;
-
-const AddButton = styled.button``;
-
-const WebsiteLbl = styled.span`
-  font-size: 20px;
-`;
-
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -201,8 +190,6 @@ const CompanyDetails = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
-const WebsiteWrapper = styled.div``;
 
 const WebSite = styled.a`
   font-size: 20px;
@@ -277,8 +264,6 @@ const Price = styled.h2`
   flex: 1;
   text-align: right;
 `;
-
-const Qty = styled.div``;
 
 const Category = styled.h2`
   display: flex;
