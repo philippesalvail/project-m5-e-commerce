@@ -75,8 +75,9 @@ export const purchaseCartItemsRequest = () => ({
   type: "PURCHASE_CART_ITEMS_REQUEST",
 });
 
-export const purchaseCartItemsReceive = () => ({
+export const purchaseCartItemsReceive = (status) => ({
   type: "PURCHASE_CART_ITEMS_RECEIVE",
+  status,
 });
 
 export const purchaseCartItemsError = (error) => ({

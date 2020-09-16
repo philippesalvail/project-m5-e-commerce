@@ -15,8 +15,7 @@ import {
 
 const Cart = () => {
   const cartItems = useSelector(getCartItemArray);
-  const { status, error } = useSelector((state) => state.purchase);
-  console.log({ status, error });
+  const { status } = useSelector((state) => state.purchase);
   const dispatch = useDispatch();
 
   let totalItems = 0;
@@ -67,8 +66,7 @@ const Cart = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        dispatch(purchaseCartItemsReceive());
+        dispatch(purchaseCartItemsReceive(data.status));
         dispatch(clearCart());
       })
       .catch((error) => {
