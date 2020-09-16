@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 import CartItem from "../Cart/CartItem";
 import CartButton from "../Cart/CartButton";
@@ -16,7 +16,7 @@ import {
 const Cart = () => {
   const cartItems = useSelector(getCartItemArray);
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
 
   let totalItems = 0;
 
