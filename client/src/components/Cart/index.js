@@ -72,7 +72,6 @@ const Cart = () => {
         }
       })
       .then((data) => {
-        console.log("data", data);
         dispatch(purchaseCartItemsReceive());
         dispatch(clearCart());
         // history.push("/");
