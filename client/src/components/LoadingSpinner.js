@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSpring, animated } from "react-spring";
 import { GrUpdate } from "react-icons/gr";
 
-const LoadingSpinner = ({ size }) => {
+const LoadingSpinner = ({ size = "50px" }) => {
   const spinAnimation = useSpring({
     transform: `rotate(360)`,
     from: {
