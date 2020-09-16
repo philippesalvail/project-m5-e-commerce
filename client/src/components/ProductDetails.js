@@ -17,7 +17,7 @@ function ProductDetails() {
   const item = useParams().itemId;
   const productDetails = useSelector((state) => state.product.currentProduct);
   const companyDetails = useSelector((state) => state.product.currentCompany);
-  const productPurchase = useSelector((state) => state.productPurchase);
+  const productPurchase = useSelector((state) => state.purchase);
   const [quantity, setQuantity] = React.useState(1);
   const dispatch = useDispatch();
 
