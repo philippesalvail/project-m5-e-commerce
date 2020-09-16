@@ -64,14 +64,9 @@ const Cart = () => {
       },
       body: JSON.stringify(arr),
     })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Something went wrong");
-        }
-      })
+      .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         dispatch(purchaseCartItemsReceive());
         dispatch(clearCart());
         // history.push("/");
