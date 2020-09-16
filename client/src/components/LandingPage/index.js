@@ -23,7 +23,8 @@ const LandingPage = () => {
 
     fetch(`/items/filter/${currentCategory}/`)
       .then((res) => res.json())
-      .then((itemList) => dispatch(receiveItemList(itemList)));
+      .then((itemList) => dispatch(receiveItemList(itemList)))
+      .catch((error) => dispatch(receiveItemListError(error)));
   }, [currentCategory]);
 
   if (status === "error") {

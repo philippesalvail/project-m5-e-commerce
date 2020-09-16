@@ -5,13 +5,21 @@ import { useSelector } from "react-redux";
 import { IconContext } from "react-icons";
 import { GrCart } from "react-icons/gr";
 
+import ScaleIn from "./ScaleIn";
+
 import { getCartItemArray } from "../../reducers/cartReducer";
 
 const CartButton = () => {
   const cartItemArray = useSelector(getCartItemArray);
 
-  const badgeContent =
-    cartItemArray.length === 0 ? "" : `${cartItemArray.length}`;
+  let badgeContent = "";
+  if (cartItemArray.length !== 0) {
+    let numItems = 0;
+    cartItemArray.forEach((item) => {
+      numItems += item.quantity;
+    });
+    badgeContent = String(numItems);
+  }
 
   // console.log(badgeContent);
   return (
@@ -22,7 +30,9 @@ const CartButton = () => {
         </div>
       </IconContext.Provider>
       {cartItemArray.length !== 0 && (
-        <CartBadge>{cartItemArray.length}</CartBadge>
+        <ScaleIn>
+          <CartBadge>{badgeContent}</CartBadge>
+        </ScaleIn>
       )}
     </Wrapper>
   );
@@ -56,8 +66,6 @@ const CartIcon = styled(GrCart)``;
 
 const CartBadge = styled.div`
   position: absolute;
-  top: -12px;
-  right: -12px;
   height: 25px;
   width: 25px;
   font-size: 17px;
