@@ -14,7 +14,10 @@ const handleSingleItem = (req, res) => {
   let itemCategory = itemDetails.category;
 
   let similarItems = items.filter(
-    (item) => item.category == itemCategory && itemDetails.name != item.name
+    (item) =>
+      item.category == itemCategory &&
+      itemDetails.name != item.name &&
+      item.numInStock !== 0
   );
 
   itemDetails && company && similarItems
