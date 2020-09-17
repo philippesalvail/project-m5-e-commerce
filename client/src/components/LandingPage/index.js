@@ -44,7 +44,7 @@ const LandingPage = () => {
     return (
       <Wrapper>
         <NavBar />
-        <Error searchInput={searchInput} />
+        <Error> {`Sorry! No matches found for query "${searchInput}"`}</Error>
       </Wrapper>
     );
   }
