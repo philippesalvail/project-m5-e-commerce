@@ -1,23 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import CartItem from "../Cart/CartItem";
-import CartButton from "../Cart/CartButton";
+import PurchaseButton from "./PurchaseButton";
 import LoadingSpinner from "../LoadingSpinner";
 import { getCartItemArray } from "../../reducers/cartReducer";
-import {
-  purchaseCartItemsRequest,
-  purchaseCartItemsReceive,
-  purchaseCartItemsError,
-  clearCart,
-} from "../../actions";
 
 const Cart = () => {
   const cartItems = useSelector(getCartItemArray);
   const { status, error } = useSelector((state) => state.purchase);
-  console.log({ status, error });
-  const dispatch = useDispatch();
 
   let totalItems = 0;
 
@@ -47,34 +39,6 @@ const Cart = () => {
       });
     }
     return <span>${totalPrice.toFixed(2) / 100}</span>;
-  };
-
-  const handlePurchase = (event) => {
-    event.preventDefault();
-    dispatch(purchaseCartItemsRequest());
-
-    let arr = [];
-    cartItems.forEach((item) => {
-      arr.push({ [item._id]: item.quantity });
-    });
-
-    fetch("/buy", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(arr),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        dispatch(purchaseCartItemsReceive());
-        dispatch(clearCart());
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        dispatch(purchaseCartItemsError(error));
-      });
   };
 
   return (
@@ -135,16 +99,7 @@ const Cart = () => {
             </BuyGrid>
 
             <ButtonWrapper>
-              <CartButton
-                style={{
-                  width: "70%",
-                  height: "50px",
-                  textTransform: "uppercase",
-                }}
-                onClick={handlePurchase}
-              >
-                Checkout
-              </CartButton>
+              <PurchaseButton cartItems={cartItems} />
             </ButtonWrapper>
           </BuyWrapper>
         </CartWrapper>
