@@ -10,7 +10,7 @@ const handlePurchase = (req, res) => {
     items.forEach((element) => {
       if (element._id === Number(id)) {
         if (element.numInStock < quantity) {
-          throw new Error("You attemted to buy too many items");
+          throw new Error("You attempted to buy too many items");
         } else {
           element.numInStock -= quantity;
         }
