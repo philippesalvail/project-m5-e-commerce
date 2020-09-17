@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import AddToCarButton from "./AddToCartButton";
-import CheaperItemsDisplay from "./CheaperItemsDisplay";
+import SimilarItemsDisplay from "./SimilarItemsDisplay";
 import { NavLink } from "react-router-dom";
 
 import {
@@ -18,6 +18,7 @@ function ProductDetails() {
   const productDetails = useSelector((state) => state.product.currentProduct);
   const companyDetails = useSelector((state) => state.product.currentCompany);
   const productPurchase = useSelector((state) => state.purchase);
+  const similarItems = useSelector((state) => state.product.similarItems);
   const [quantity, setQuantity] = React.useState(1);
   const dispatch = useDispatch();
 
@@ -28,7 +29,6 @@ function ProductDetails() {
       return;
     }
   };
-
   const decreaseQtyPurchase = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
@@ -42,9 +42,6 @@ function ProductDetails() {
     fetch(`/item/${item}`)
       .then((response) => response.json())
       .then((jsonObj) => dispatch(receiveProductDetail(jsonObj)))
-      .then((product) =>
-        dispatch(selectProduct(product.detail.itemDetails._id))
-      )
       .catch((err) => dispatch(receiveProductError(err)));
   }, [item]);
 
@@ -119,7 +116,7 @@ function ProductDetails() {
               </Wrapper>
             </Description>
           </Product>
-          <CheaperItemsDisplay itemId={item} />
+          <SimilarItemsDisplay similarItems={similarItems} />
           <BackContainer>
             <BackLink to={`/`}>Return to Main Page</BackLink>
           </BackContainer>

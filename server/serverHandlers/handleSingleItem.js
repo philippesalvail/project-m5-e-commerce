@@ -11,18 +11,14 @@ const handleSingleItem = (req, res) => {
     return comp["_id"] == itemDetails["companyId"];
   });
 
-  let pricePoint = parseFloat(itemDetails.price.substring(1));
   let itemCategory = itemDetails.category;
 
-  let cheaperItems = items.filter(
-    (item) =>
-      parseFloat(item.price.substring(1)) <= pricePoint &&
-      item.category == itemCategory &&
-      itemDetails.name != item.name
+  let similarItems = items.filter(
+    (item) => item.category == itemCategory && itemDetails.name != item.name
   );
 
-  itemDetails && company
-    ? res.status(200).send({ itemDetails, company, cheaperItems })
+  itemDetails && company && similarItems
+    ? res.status(200).send({ itemDetails, company, similarItems })
     : res.status(404).send("Item does not exists");
 };
 
