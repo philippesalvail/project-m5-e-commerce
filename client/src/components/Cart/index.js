@@ -10,6 +10,7 @@ import { getCartItemArray } from "../../reducers/cartReducer";
 const Cart = () => {
   const cartItems = useSelector(getCartItemArray);
   const { status, error } = useSelector((state) => state.purchase);
+  const dispatch = useDispatch();
 
   let totalItems = 0;
 
@@ -41,6 +42,36 @@ const Cart = () => {
     return <span>${totalPrice.toFixed(2) / 100}</span>;
   };
 
+<<<<<<< HEAD
+=======
+  const handlePurchase = (event) => {
+    event.preventDefault();
+    dispatch(purchaseCartItemsRequest());
+
+    let arr = [];
+    cartItems.forEach((item) => {
+      arr.push({ [item._id]: item.quantity });
+    });
+
+    fetch("/buy", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(arr),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(purchaseCartItemsReceive(data.status));
+        dispatch(clearCart());
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        dispatch(purchaseCartItemsError(error));
+      });
+  };
+
+>>>>>>> clear-cart
   return (
     <PageWrapper>
       {status === "loading" ? (

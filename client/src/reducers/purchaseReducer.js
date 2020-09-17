@@ -14,6 +14,7 @@ export default function purchaseReducer(state = initialState, action) {
 
     case "PURCHASE_CART_ITEMS_RECEIVE":
       return produce(state, (draftState) => {
+        draftState.status = action.status;
         draftState.status = "idle";
       });
 
