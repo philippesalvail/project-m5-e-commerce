@@ -12,9 +12,10 @@ export const receiveItemListError = (error) => ({
   error,
 });
 
-export const changeCategoryFilter = (filter) => ({
+export const changeCategoryFilter = (filter, searchInput) => ({
   type: "CHANGE_FILTER_CATEGORY",
   filter,
+  searchInput,
 });
 
 export const addItemToCart = (itemId, quantity) => ({

@@ -20,7 +20,10 @@ const handlePurchase = (req, res) => {
       }
     });
   });
-  res.status(200).send({ status: "Purchase completed" });
+  const delay = Math.random() * 1250 + 500;
+  setTimeout(() => {
+    res.status(200).send({ status: "Purchase completed" });
+  }, delay);
 };
 
 module.exports = {
