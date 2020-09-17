@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ItemGrid from "./ItemGrid";
 import NavBar from "./NavBar";
 import LoadingSpinner from "../LoadingSpinner";
-import Error from "./Error";
+import Error from "../Error";
 
 import {
   requestItemList,
