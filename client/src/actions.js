@@ -18,11 +18,6 @@ export const changeCategoryFilter = (filter, searchInput) => ({
   searchInput,
 });
 
-export const changeSearchInput = (searchInput) => ({
-  type: "CHANGE_SEARCH_INPUT",
-  searchInput,
-});
-
 export const addItemToCart = (itemId, quantity) => ({
   type: "ADD_ITEM",
   itemId,

@@ -13,7 +13,10 @@ const handleItemsByCategory = (req, res) => {
 
   //console.log(matchingItemsArray);
 
-  res.status(200).send(matchingItemsArray);
+  const delay = Math.random() * 1250 + 500;
+  setTimeout(() => {
+    res.status(200).send(matchingItemsArray);
+  }, delay);
 };
 
 const handleItemsByCompany = (req, res) => {
@@ -31,12 +34,17 @@ const handleItemsByCompany = (req, res) => {
   );
 
   //console.log(matchingItemsArray);
-
-  res.status(200).send(matchingItemsArray);
+  const delay = Math.random() * 1250 + 500;
+  setTimeout(() => {
+    res.status(200).send(matchingItemsArray);
+  }, delay);
 };
 
 const handleAllItems = (req, res) => {
-  res.status(200).send(items);
+  const delay = Math.random() * 1250 + 500;
+  setTimeout(() => {
+    res.status(200).send(items);
+  }, delay);
 };
 
 module.exports = {
