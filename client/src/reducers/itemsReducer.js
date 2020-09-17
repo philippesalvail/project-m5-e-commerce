@@ -6,7 +6,6 @@ const initialState = {
   itemList: null,
   error: null,
   searchInput: null,
-  int: 0,
 };
 
 export default function itemsReducer(state = initialState, action) {
@@ -31,13 +30,11 @@ export default function itemsReducer(state = initialState, action) {
       });
     case "CHANGE_FILTER_CATEGORY":
       return produce(state, (draftState) => {
-        draftState.currentCategory =
-          action.filter === "search" ? `search + ${state.int}` : action.filter;
+        draftState.currentCategory = action.filter;
         draftState.status = "loading";
         draftState.searchInput = action.filter.includes("search")
           ? action.searchInput
           : null;
-        draftState.int++;
       });
 
     default:
