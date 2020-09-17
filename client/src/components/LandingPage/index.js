@@ -22,9 +22,10 @@ const LandingPage = () => {
   //console.log(currentCategory);
 
   React.useEffect(() => {
-    const fetchUrl = currentCategory.includes("search")
-      ? `search/${searchInput}`
-      : `/items/filter/${currentCategory}/`;
+    const fetchUrl =
+      currentCategory === "search"
+        ? `search/${searchInput}`
+        : `/items/filter/${currentCategory}/`;
 
     dispatch(requestItemList());
     fetch(fetchUrl)
@@ -37,7 +38,7 @@ const LandingPage = () => {
         }
       })
       .catch((error) => dispatch(receiveItemListError(error)));
-  }, [currentCategory]);
+  }, [currentCategory, searchInput]);
 
   if (status === "error") {
     return (
