@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
 import { changeCategoryFilter } from "../../actions";
+import SearchBar from "./SearchBar";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ const NavBar = () => {
       >
         Pets and Animals
       </CategoryButton>
+      <SearchBar />
     </Wrapper>
   );
 };
