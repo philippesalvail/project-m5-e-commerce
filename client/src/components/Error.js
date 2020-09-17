@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { GrAlert } from "react-icons/gr";
 import { IconContext } from "react-icons";
 
-const Error = ({ searchInput }) => {
+const Error = ({ children }) => {
   return (
     <Wrapper>
       <IconContext.Provider value={{ size: "75px" }}>
@@ -11,9 +11,7 @@ const Error = ({ searchInput }) => {
           <GrAlert />
         </div>
       </IconContext.Provider>
-      <ErrorBody>
-        {`Sorry! No matches found for query "${searchInput}"`}{" "}
-      </ErrorBody>
+      <ErrorBody>{children}</ErrorBody>
     </Wrapper>
   );
 };

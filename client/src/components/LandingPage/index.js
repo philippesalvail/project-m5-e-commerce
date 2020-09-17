@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ItemGrid from "./ItemGrid";
 import NavBar from "./NavBar";
 import LoadingSpinner from "../LoadingSpinner";
-import Error from "./Error";
+import Error from "../Error";
 
 import {
   requestItemList,
@@ -44,7 +44,7 @@ const LandingPage = () => {
     return (
       <Wrapper>
         <NavBar />
-        <Error searchInput={searchInput} />
+        <Error> {`Sorry! No matches found for query "${searchInput}"`}</Error>
       </Wrapper>
     );
   }
