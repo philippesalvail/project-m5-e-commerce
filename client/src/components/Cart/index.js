@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import CartItem from "../Cart/CartItem";
 import PurchaseButton from "./PurchaseButton";
@@ -42,36 +42,6 @@ const Cart = () => {
     return <span>${totalPrice.toFixed(2) / 100}</span>;
   };
 
-<<<<<<< HEAD
-=======
-  const handlePurchase = (event) => {
-    event.preventDefault();
-    dispatch(purchaseCartItemsRequest());
-
-    let arr = [];
-    cartItems.forEach((item) => {
-      arr.push({ [item._id]: item.quantity });
-    });
-
-    fetch("/buy", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(arr),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch(purchaseCartItemsReceive(data.status));
-        dispatch(clearCart());
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        dispatch(purchaseCartItemsError(error));
-      });
-  };
-
->>>>>>> clear-cart
   return (
     <PageWrapper>
       {status === "loading" ? (
