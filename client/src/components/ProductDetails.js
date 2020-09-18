@@ -5,12 +5,12 @@ import { useParams } from "react-router-dom";
 import AddToCarButton from "./AddToCartButton";
 import SimilarItemsDisplay from "./SimilarItemsDisplay";
 import { NavLink } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
 
 import {
   requestProductDetail,
   receiveProductDetail,
   receiveProductError,
-  selectProduct,
 } from "../actions";
 
 function ProductDetails() {
@@ -19,6 +19,7 @@ function ProductDetails() {
   const companyDetails = useSelector((state) => state.product.currentCompany);
   const productPurchase = useSelector((state) => state.purchase);
   const similarItems = useSelector((state) => state.product.similarItems);
+  const loadingState = useSelector((state) => state.status);
   const [quantity, setQuantity] = React.useState(1);
   const dispatch = useDispatch();
 
@@ -52,13 +53,13 @@ function ProductDetails() {
           <Product>
             <Img src={productDetails.imageSrc} />
             <Description>
-              <Category>{productDetails.category}</Category>
+              {/* <Category>{productDetails.category}</Category> */}
               <NameAndPrice>
                 <Name>{productDetails.name}</Name>
                 <Price>{productDetails.price}</Price>
               </NameAndPrice>
               <Item>
-                {productDetails.numInStock == 0 ? (
+                {productDetails.numInStock === 0 ? (
                   <OutOfStockLbl>Out Of Stock</OutOfStockLbl>
                 ) : (
                   <QtyAndBackGround>
@@ -83,9 +84,9 @@ function ProductDetails() {
                         >
                           -
                         </DecrementBtn>
-                        <QtySelected value={quantity} />
+                        <QtySelected placeholder={quantity} />
                         <IncrementBtn
-                          onClick={() => {
+                          onChange={() => {
                             increaseQtyPurchase();
                           }}
                         >
@@ -122,7 +123,7 @@ function ProductDetails() {
           </BackContainer>
         </DetailPage>
       ) : (
-        <div>Loading</div>
+        <LoadingSpinner />
       )}
     </>
   );
@@ -131,6 +132,7 @@ function ProductDetails() {
 const OutOfStockLbl = styled.div`
   color: red;
   font-size: 1.25em;
+  text-align: right;
 `;
 
 const BackContainer = styled.div`
@@ -170,7 +172,6 @@ const QtyWrapper = styled.div`
 `;
 
 const QtyForm = styled.div`
-  margin-top: 1%;
   display: flex;
   justify-content: space-between;
 `;
@@ -193,13 +194,6 @@ const WebSite = styled.a`
   text-decoration: none;
 `;
 
-const ProductImg = styled.div`
-  position: relative;
-  flex: 1;
-  text-align: center;
-  box-shadow: 2px 2px 2px 2px #000;
-  margin-right: 2%;
-`;
 const Img = styled.img`
   box-shadow: 2px 2px 2px 2px #000;
   margin-right: 2%;
@@ -218,17 +212,18 @@ const QtyLbl = styled.label`
 const NameLbl = styled.p`
   font-size: 20px;
 `;
-const WornLbl = styled.p`
+const WornLbl = styled.div`
   font-size: 20px;
   text-align: center;
 `;
-const CountryLbl = styled.p`
+const CountryLbl = styled.div`
   font-size: 20px;
 `;
 
 const QtyRemaining = styled.label`
   color: red;
   font-size: 1.25em;
+  margin-bottom: 3%;
 `;
 
 const QtyAndBackGround = styled.div``;
@@ -256,17 +251,12 @@ const NameAndPrice = styled.div`
 `;
 const Name = styled.h3`
   flex: 1;
+  margin-top: 0;
 `;
 const Price = styled.h2`
   flex: 1;
   text-align: right;
-`;
-
-const Category = styled.h2`
-  display: flex;
-  flex-direction: column;
   margin-top: 0;
-  margin-bottom: 0;
 `;
 
 export default ProductDetails;
