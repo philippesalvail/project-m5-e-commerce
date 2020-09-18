@@ -10,6 +10,8 @@ const {
   handleAllItems,
 } = require("./serverHandlers/handleItems");
 
+const { handleSearchItems } = require("./serverHandlers/handleSearch");
+
 const { handlePurchase } = require("./serverHandlers/handlePurchase");
 const { handleSingleItem } = require("./serverHandlers/handleSingleItem");
 
@@ -38,6 +40,7 @@ express()
   .get("/items/company/:companyId", handleItemsByCompany)
   .get("/items/", handleAllItems)
   .get("/item/:itemId", handleSingleItem)
+  .get("/search/:input", handleSearchItems)
 
   .patch("/buy", handlePurchase)
 

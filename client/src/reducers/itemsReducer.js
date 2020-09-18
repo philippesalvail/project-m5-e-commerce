@@ -5,6 +5,7 @@ const initialState = {
   currentCategory: "medical",
   itemList: null,
   error: null,
+  searchInput: null,
 };
 
 export default function itemsReducer(state = initialState, action) {
@@ -19,6 +20,7 @@ export default function itemsReducer(state = initialState, action) {
       return produce(state, (draftState) => {
         draftState.status = "idle";
         draftState.itemList = action.itemList;
+        draftState.error = null;
       });
 
     case "ITEM_LIST_FAILURE":
@@ -30,6 +32,9 @@ export default function itemsReducer(state = initialState, action) {
       return produce(state, (draftState) => {
         draftState.currentCategory = action.filter;
         draftState.status = "loading";
+        draftState.searchInput = action.filter.includes("search")
+          ? action.searchInput
+          : null;
       });
 
     default:

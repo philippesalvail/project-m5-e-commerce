@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ItemGrid from "./ItemGrid";
 import NavBar from "./NavBar";
 import LoadingSpinner from "../LoadingSpinner";
+import Error from "../Error";
 
 import {
   requestItemList,
@@ -14,27 +15,44 @@ import {
 
 const LandingPage = () => {
   const dispatch = useDispatch();
-  const { status, error, currentCategory } = useSelector(
+  const { status, error, currentCategory, searchInput } = useSelector(
     (state) => state.items
   );
 
-  React.useEffect(() => {
-    dispatch(requestItemList());
+  //console.log(currentCategory);
 
-    fetch(`/items/filter/${currentCategory}/`)
+  React.useEffect(() => {
+    const fetchUrl =
+      currentCategory === "search"
+        ? `search/${searchInput}`
+        : `/items/filter/${currentCategory}/`;
+
+    dispatch(requestItemList());
+    fetch(fetchUrl)
       .then((res) => res.json())
-      .then((itemList) => dispatch(receiveItemList(itemList)))
+      .then((itemList) => {
+        if (!itemList.Error) {
+          dispatch(receiveItemList(itemList));
+        } else {
+          dispatch(receiveItemListError(error));
+        }
+      })
       .catch((error) => dispatch(receiveItemListError(error)));
-  }, [currentCategory]);
+  }, [currentCategory, searchInput]);
 
   if (status === "error") {
-    return { error };
+    return (
+      <Wrapper>
+        <NavBar />
+        <Error> {`Sorry! No matches found for query "${searchInput}"`}</Error>
+      </Wrapper>
+    );
   }
 
   return (
     <Wrapper>
       <NavBar />
-      {status === "loading" ? <LoadingSpinner size={"50px"} /> : <ItemGrid />}
+      {status === "loading" ? <LoadingSpinner /> : <ItemGrid />}
     </Wrapper>
   );
 };

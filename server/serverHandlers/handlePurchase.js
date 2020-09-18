@@ -17,7 +17,10 @@ const handlePurchase = (req, res) => {
       }
     });
   });
-  res.status(200).send({ status: "success" });
+  const delay = Math.random() * 1250 + 500;
+  setTimeout(() => {
+    res.status(200).send({ status: "success" });
+  }, delay);
 };
 
 module.exports = {
