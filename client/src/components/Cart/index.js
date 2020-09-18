@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CartItem from "../Cart/CartItem";
 import PurchaseButton from "./PurchaseButton";
 import LoadingSpinner from "../LoadingSpinner";
+import ButtonSpinner from "../ButtonSpinner";
 import { getCartItemArray } from "../../reducers/cartReducer";
 
 const Cart = () => {
@@ -44,67 +45,65 @@ const Cart = () => {
 
   return (
     <PageWrapper>
-      {status === "loading" ? (
-        <LoadingSpinner size={"50px"} />
-      ) : (
-        <CartWrapper>
-          <BagWrapper>
-            <BagHeader>
-              <h1>My cart</h1>
+      <CartWrapper>
+        <BagWrapper>
+          <BagHeader>
+            <h1>My cart</h1>
 
-              <StyledP>
-                {cartItems.length > 0 ? (
-                  <span>{calculateTotalItems(cartItems)} items</span>
-                ) : (
-                  <span>0 items</span>
-                )}
-              </StyledP>
-            </BagHeader>
+            <StyledP>
+              {cartItems.length > 0 ? (
+                <span>{calculateTotalItems(cartItems)} items</span>
+              ) : (
+                <span>0 items</span>
+              )}
+            </StyledP>
+          </BagHeader>
 
-            <BagBody>
-              <CartItemContainer style={{ padding: 0 }}>
-                {cartItems.length > 0 ? (
-                  cartItems.map((item) => {
-                    return (
-                      <ListItem key={item._id}>
-                        <CartItem item={item} />
-                      </ListItem>
-                    );
-                  })
-                ) : (
-                  <span style={{ fontStyle: "italic" }}>
-                    Your cart is empty.
-                  </span>
-                )}
-              </CartItemContainer>
-            </BagBody>
-          </BagWrapper>
+          <BagBody>
+            <CartItemContainer style={{ padding: 0 }}>
+              {cartItems.length > 0 ? (
+                cartItems.map((item) => {
+                  return (
+                    <ListItem key={item._id}>
+                      <CartItem item={item} />
+                    </ListItem>
+                  );
+                })
+              ) : (
+                <span style={{ fontStyle: "italic" }}>Your cart is empty.</span>
+              )}
+            </CartItemContainer>
+          </BagBody>
+        </BagWrapper>
 
-          <BuyWrapper>
-            <h2
-              style={{ borderBottom: "1px solid gainsboro", paddingBottom: 15 }}
-            >
-              Total
-            </h2>
-            <BuyGrid>
-              <h3>Sub-total</h3>
-              <StyledP>
-                {cartItems.length > 0 ? (
-                  <span>{calculateTotalPrice(cartItems)}</span>
-                ) : (
-                  <span>$0</span>
-                )}
-              </StyledP>
-              <h3>Delivery</h3>
-              <StyledP>Free</StyledP>
-            </BuyGrid>
+        <BuyWrapper>
+          <h2
+            style={{ borderBottom: "1px solid gainsboro", paddingBottom: 15 }}
+          >
+            Total
+          </h2>
+          <BuyGrid>
+            <h3>Sub-total</h3>
+            <StyledP>
+              {cartItems.length > 0 ? (
+                <span>{calculateTotalPrice(cartItems)}</span>
+              ) : (
+                <span>$0</span>
+              )}
+            </StyledP>
+            <h3>Delivery</h3>
+            <StyledP>Free</StyledP>
+          </BuyGrid>
 
-            <ButtonWrapper>
+          <ButtonWrapper>
+            {status === "loading" ? (
+              <ButtonSpinner />
+            ) : (
               <PurchaseButton cartItems={cartItems} />
-            </ButtonWrapper>
-          </BuyWrapper>
-        </CartWrapper>
-      )}
+            )}
+          </ButtonWrapper>
+        </BuyWrapper>
+      </CartWrapper>
     </PageWrapper>
   );
 };
@@ -177,6 +176,7 @@ const BuyGrid = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 25px 0 0 0;
 `;
 

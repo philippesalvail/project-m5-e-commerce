@@ -44,9 +44,6 @@ const PurchaseButton = ({ cartItems }) => {
 };
 
 const CartButton = styled.button`
-  position: relative;
-  display: block;
-  width: 100%;
   border-radius: 12px;
   background: #e1ad01;
   color: white;
@@ -56,7 +53,7 @@ const CartButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   width: 70%;
-  height: 50px;
+  min-height: 50px;
   text-transform: uppercase;
 `;
 
