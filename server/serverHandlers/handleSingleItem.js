@@ -22,7 +22,7 @@ const handleSingleItem = (req, res) => {
 
   itemDetails && company && similarItems
     ? res.status(200).send({ itemDetails, company, similarItems })
-    : res.status(404).send("Item does not exists");
+    : res.status(404).send("Item does not exist");
 };
 
 module.exports = {
