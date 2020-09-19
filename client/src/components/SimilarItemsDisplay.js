@@ -33,6 +33,7 @@ const SimilarItemsDisplay = ({ similarItems }) => {
 
 const Wrapper = styled.div`
   background: gainsboro;
+  padding-bottom: 80px;
 `;
 
 const Bottom = styled.div`
@@ -48,7 +49,7 @@ const Title = styled.p`
 
 const Display = styled.div`
   margin: 0 auto;
-  width: 70%;
+  width: 80%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   column-gap: 30px;
