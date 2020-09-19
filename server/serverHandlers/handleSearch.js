@@ -20,7 +20,7 @@ const handleSearchItems = (req, res) => {
 
   if (matchingItemsArray.length === 0) {
     console.log("no matches", searchInput);
-    res.status(400).send({ Error: "No Match Found" });
+    res.status(200).send({ Error: "No Match Found" });
     return;
   }
 

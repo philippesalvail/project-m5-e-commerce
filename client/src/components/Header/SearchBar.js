@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { GrSearch } from "react-icons/gr";
 import { IconContext } from "react-icons";
-import { COLORS } from "../../constants";
+// import { COLORS } from "../../constants";
 
 import UnstyledButton from "../UnstyledButton";
 
-import { changeCategoryFilter, changeSearchInput } from "../../actions";
+import { changeCategoryFilter } from "../../actions";
 
 const SearchBar = () => {
   const dispatch = useDispatch();

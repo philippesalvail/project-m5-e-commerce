@@ -37,6 +37,7 @@ const LandingPage = () => {
         }
       })
       .catch((error) => dispatch(receiveItemListError(error)));
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [currentCategory, searchInput]);
 
   if (status === "error") {

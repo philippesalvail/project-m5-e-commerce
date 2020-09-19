@@ -1,3 +1,4 @@
+// ITEM LIST ACTIONS
 export const requestItemList = () => ({
   type: "ITEM_LIST_REQUEST",
 });
@@ -16,12 +17,6 @@ export const changeCategoryFilter = (filter, searchInput) => ({
   type: "CHANGE_FILTER_CATEGORY",
   filter,
   searchInput,
-});
-
-export const addItemToCart = (itemId, quantity) => ({
-  type: "ADD_ITEM",
-  itemId,
-  quantity,
 });
 
 export const requestProductDetail = () => ({
