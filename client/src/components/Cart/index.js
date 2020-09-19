@@ -123,7 +123,7 @@ const PageWrapper = styled.div`
 const CartWrapper = styled.div`
   display: flex;
   width: 80vw;
-  height: 60vh;
+  height: 70vh;
 `;
 
 const BagWrapper = styled.div`
