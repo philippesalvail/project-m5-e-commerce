@@ -117,9 +117,6 @@ function ProductDetails() {
             </Description>
           </Product>
           <SimilarItemsDisplay similarItems={similarItems} />
-          <BackContainer>
-            <BackLink to={`/`}>Return to Main Page</BackLink>
-          </BackContainer>
         </DetailPage>
       ) : (
         <div>Loading</div>

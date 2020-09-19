@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import CartItem from "../Cart/CartItem";
 import PurchaseButton from "./PurchaseButton";
-import LoadingSpinner from "../LoadingSpinner";
 import ButtonSpinner from "../ButtonSpinner";
 import { getCartItemArray } from "../../reducers/cartReducer";
 
