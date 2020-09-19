@@ -7,8 +7,6 @@ const ScaleIn = ({ children }) => {
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
-    top: 0,
-    right: 0,
     transform: "scale(1)",
     from: {
       transform: "scale(0.2)",

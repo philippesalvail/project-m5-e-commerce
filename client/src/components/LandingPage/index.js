@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
 import ItemGrid from "./ItemGrid";
-import NavBar from "./NavBar";
 import LoadingSpinner from "../LoadingSpinner";
 import Error from "../Error";
 
@@ -19,7 +18,7 @@ const LandingPage = () => {
     (state) => state.items
   );
 
-  //console.log(currentCategory);
+  console.log(currentCategory);
 
   React.useEffect(() => {
     const fetchUrl =
@@ -43,7 +42,6 @@ const LandingPage = () => {
   if (status === "error") {
     return (
       <Wrapper>
-        <NavBar />
         <Error> {`Sorry! No matches found for query "${searchInput}"`}</Error>
       </Wrapper>
     );
@@ -51,7 +49,6 @@ const LandingPage = () => {
 
   return (
     <Wrapper>
-      <NavBar />
       {status === "loading" ? <LoadingSpinner /> : <ItemGrid />}
     </Wrapper>
   );

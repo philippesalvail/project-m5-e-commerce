@@ -27,15 +27,15 @@ const CartButton = () => {
   return (
     <Wrapper to={"/cart"}>
       <IconContext.Provider value={{ size: "35px" }}>
-        <div>
-          <CartIcon></CartIcon>
-        </div>
+        <IconWrapper>
+          <CartIcon />
+          {cartItemArray.length !== 0 && (
+            <ScaleIn>
+              <CartBadge>{badgeContent}</CartBadge>
+            </ScaleIn>
+          )}
+        </IconWrapper>
       </IconContext.Provider>
-      {cartItemArray.length !== 0 && (
-        <ScaleIn>
-          <CartBadge>{badgeContent}</CartBadge>
-        </ScaleIn>
-      )}
     </Wrapper>
   );
 };
@@ -61,7 +61,12 @@ const Wrapper = styled(Link)`
     color: white;
   } */
 `;
-
+const IconWrapper = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const CartIcon = styled(FiShoppingCart)`
   color: white;
   padding: 0 20px 0 0;
@@ -69,8 +74,8 @@ const CartIcon = styled(FiShoppingCart)`
 
 const CartBadge = styled.div`
   position: absolute;
-  top: 5px;
-  right: 17px;
+  top: -22px;
+  right: -20px;
   height: 20px;
   width: 20px;
   font-size: 15px;
