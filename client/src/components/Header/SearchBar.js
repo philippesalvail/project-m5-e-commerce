@@ -61,6 +61,6 @@ const TextInput = styled.input`
 
 const Form = styled.form`
   display: flex;
-  height: 20px;
+  height: 24px;
 `;
 export default SearchBar;

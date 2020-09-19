@@ -5,20 +5,26 @@ import { COLORS } from "../../constants";
 import { FiWind } from "react-icons/fi";
 
 import CartButton from "./CartButton";
+import NavBar from "./NavBar";
 
 const Header = () => {
   return (
     <Wrapper>
-      <TitleLink to={"/"}>
-        620sqm <FiWind />
-      </TitleLink>
+      <TopHeader>
+        <TitleLink to={"/"}>
+          620sqm <FiWind />
+        </TitleLink>
 
-      <CartButton />
+        <CartButton />
+      </TopHeader>
+      <NavBar />
     </Wrapper>
   );
 };
 
-const Wrapper = styled.header`
+const Wrapper = styled.header``;
+
+const TopHeader = styled.div`
   margin: 0;
   padding: 0 0 0 20px;
   display: flex;
