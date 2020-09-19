@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { IconContext } from "react-icons";
-import { GrCart } from "react-icons/gr";
+import { FiShoppingCart } from "react-icons/fi";
+
+import { COLORS } from "../../constants";
 
 import ScaleIn from "./ScaleIn";
 
@@ -39,13 +41,11 @@ const CartButton = () => {
 };
 
 const Wrapper = styled(Link)`
-  background: white;
   position: relative;
   padding: 8px 10px 0;
   height: 45px;
   margin: 0;
-  border-radius: 5px;
-  border: 1px black solid;
+  color: white;
 
   /* & :before {
     content: "";
@@ -62,16 +62,21 @@ const Wrapper = styled(Link)`
   } */
 `;
 
-const CartIcon = styled(GrCart)``;
+const CartIcon = styled(FiShoppingCart)`
+  color: white;
+  padding: 0 20px 0 0;
+`;
 
 const CartBadge = styled.div`
   position: absolute;
-  height: 25px;
-  width: 25px;
-  font-size: 17px;
+  top: 5px;
+  right: 17px;
+  height: 20px;
+  width: 20px;
+  font-size: 15px;
   text-align: center;
   border-radius: 50%;
-  background-color: red;
+  background-color: ${COLORS.yellow};
   color: white;
 `;
 

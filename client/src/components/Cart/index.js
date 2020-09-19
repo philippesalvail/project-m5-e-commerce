@@ -112,9 +112,8 @@ const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90%;
-  min-height: 380px;
-  height: 100%;
+  width: 100vw;
+  min-height: 100vh;
   background: gainsboro;
   color: #000;
   padding-top: 20px;
@@ -123,8 +122,8 @@ const PageWrapper = styled.div`
 
 const CartWrapper = styled.div`
   display: flex;
-  width: 80%;
-  height: 100%;
+  width: 80vw;
+  height: 60vh;
 `;
 
 const BagWrapper = styled.div`

@@ -17,13 +17,13 @@ const ItemGrid = () => {
 };
 
 const Wrapper = styled.div`
-  position: relative;
-  margin-top: 30px;
+  margin: 30px 0 0 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   column-gap: 30px;
   row-gap: 30px;
   width: 90%;
+  justify-items: center;
 `;
 
 export default ItemGrid;
