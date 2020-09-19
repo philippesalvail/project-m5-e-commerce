@@ -1,22 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import CartItem from "../Cart/CartItem";
-import CartButton from "../Cart/CartButton";
-import LoadingSpinner from "../LoadingSpinner";
+import PurchaseButton from "./PurchaseButton";
+import ButtonSpinner from "../ButtonSpinner";
 import { getCartItemArray } from "../../reducers/cartReducer";
-import {
-  purchaseCartItemsRequest,
-  purchaseCartItemsReceive,
-  purchaseCartItemsError,
-  clearCart,
-} from "../../actions";
 
 const Cart = () => {
   const cartItems = useSelector(getCartItemArray);
   const { status, error } = useSelector((state) => state.purchase);
-  console.log({ status, error });
   const dispatch = useDispatch();
 
   let totalItems = 0;
@@ -49,106 +42,67 @@ const Cart = () => {
     return <span>${totalPrice.toFixed(2) / 100}</span>;
   };
 
-  const handlePurchase = (event) => {
-    event.preventDefault();
-    dispatch(purchaseCartItemsRequest());
-
-    let arr = [];
-    cartItems.forEach((item) => {
-      arr.push({ [item._id]: item.quantity });
-    });
-
-    fetch("/buy", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(arr),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        dispatch(purchaseCartItemsReceive());
-        dispatch(clearCart());
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        dispatch(purchaseCartItemsError(error));
-      });
-  };
-
   return (
     <PageWrapper>
-      {status === "loading" ? (
-        <LoadingSpinner size={"50px"} />
-      ) : (
-        <CartWrapper>
-          <BagWrapper>
-            <BagHeader>
-              <h1>My cart</h1>
+      <CartWrapper>
+        <BagWrapper>
+          <BagHeader>
+            <h1>My cart</h1>
 
-              <StyledP>
-                {cartItems.length > 0 ? (
-                  <span>{calculateTotalItems(cartItems)} items</span>
-                ) : (
-                  <span>0 items</span>
-                )}
-              </StyledP>
-            </BagHeader>
+            <StyledP>
+              {cartItems.length > 0 ? (
+                <span>{calculateTotalItems(cartItems)} items</span>
+              ) : (
+                <span>0 items</span>
+              )}
+            </StyledP>
+          </BagHeader>
 
-            <BagBody>
-              <CartItemContainer style={{ padding: 0 }}>
-                {cartItems.length > 0 ? (
-                  cartItems.map((item) => {
-                    return (
-                      <ListItem key={item._id}>
-                        <CartItem item={item} />
-                      </ListItem>
-                    );
-                  })
-                ) : (
-                  <span style={{ fontStyle: "italic" }}>
-                    Your cart is empty.
-                  </span>
-                )}
-              </CartItemContainer>
-            </BagBody>
-          </BagWrapper>
+          <BagBody>
+            <CartItemContainer style={{ padding: 0 }}>
+              {cartItems.length > 0 ? (
+                cartItems.map((item) => {
+                  return (
+                    <ListItem key={item._id}>
+                      <CartItem item={item} />
+                    </ListItem>
+                  );
+                })
+              ) : (
+                <span style={{ fontStyle: "italic" }}>Your cart is empty.</span>
+              )}
+            </CartItemContainer>
+          </BagBody>
+        </BagWrapper>
 
-          <BuyWrapper>
-            <h2
-              style={{ borderBottom: "1px solid gainsboro", paddingBottom: 15 }}
-            >
-              Total
-            </h2>
-            <BuyGrid>
-              <h3>Sub-total</h3>
-              <StyledP>
-                {cartItems.length > 0 ? (
-                  <span>{calculateTotalPrice(cartItems)}</span>
-                ) : (
-                  <span>$0</span>
-                )}
-              </StyledP>
-              <h3>Delivery</h3>
-              <StyledP>Free</StyledP>
-            </BuyGrid>
+        <BuyWrapper>
+          <h2
+            style={{ borderBottom: "1px solid gainsboro", paddingBottom: 15 }}
+          >
+            Total
+          </h2>
+          <BuyGrid>
+            <h3>Sub-total</h3>
+            <StyledP>
+              {cartItems.length > 0 ? (
+                <span>{calculateTotalPrice(cartItems)}</span>
+              ) : (
+                <span>$0</span>
+              )}
+            </StyledP>
+            <h3>Delivery</h3>
+            <StyledP>Free</StyledP>
+          </BuyGrid>
 
-            <ButtonWrapper>
-              <CartButton
-                style={{
-                  width: "70%",
-                  height: "50px",
-                  textTransform: "uppercase",
-                }}
-                onClick={handlePurchase}
-              >
-                Checkout
-              </CartButton>
-            </ButtonWrapper>
-          </BuyWrapper>
-        </CartWrapper>
-      )}
+          <ButtonWrapper>
+            {status === "loading" ? (
+              <ButtonSpinner />
+            ) : (
+              <PurchaseButton cartItems={cartItems} />
+            )}
+          </ButtonWrapper>
+        </BuyWrapper>
+      </CartWrapper>
     </PageWrapper>
   );
 };
@@ -157,9 +111,8 @@ const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90%;
-  min-height: 380px;
-  height: 100%;
+  width: 100vw;
+  min-height: 100vh;
   background: gainsboro;
   color: #000;
   padding-top: 20px;
@@ -168,8 +121,8 @@ const PageWrapper = styled.div`
 
 const CartWrapper = styled.div`
   display: flex;
-  width: 80%;
-  height: 100%;
+  width: 80vw;
+  height: 70vh;
 `;
 
 const BagWrapper = styled.div`
@@ -221,6 +174,7 @@ const BuyGrid = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 25px 0 0 0;
 `;
 

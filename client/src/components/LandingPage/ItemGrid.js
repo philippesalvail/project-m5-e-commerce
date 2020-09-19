@@ -9,21 +9,28 @@ const ItemGrid = () => {
 
   return (
     <Wrapper>
-      {itemList.map((item) => {
-        return <ListItem key={item._id} item={item} />;
-      })}
+      <GridContainer>
+        {itemList.map((item) => {
+          return <ListItem key={item._id} item={item} />;
+        })}
+      </GridContainer>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  position: relative;
-  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+`;
+
+const GridContainer = styled.div`
+  margin: 30px 0 0 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   column-gap: 30px;
   row-gap: 30px;
   width: 90%;
+  justify-content: center;
 `;
 
 export default ItemGrid;

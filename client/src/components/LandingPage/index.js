@@ -59,7 +59,7 @@ const LandingPage = () => {
 
 const Wrapper = styled.div`
   margin: 0;
-  padding: 20px 20px;
+  padding: 0;
 `;
 
 export default LandingPage;

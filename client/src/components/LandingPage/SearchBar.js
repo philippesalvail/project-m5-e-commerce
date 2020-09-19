@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { GrSearch } from "react-icons/gr";
 import { IconContext } from "react-icons";
+import { COLORS } from "../../constants";
 
 import UnstyledButton from "../UnstyledButton";
 
@@ -23,7 +24,7 @@ const SearchBar = () => {
             dispatch(changeCategoryFilter("search", input));
           }}
         >
-          <IconContext.Provider value={{ size: "25px" }}>
+          <IconContext.Provider value={{ size: "20px" }}>
             <div>
               <GrSearch />
             </div>
@@ -42,11 +43,11 @@ const SearchBar = () => {
 };
 
 const Wrapper = styled.div`
-  border: 1px solid black;
   border-radius: 20px;
-  padding: 6px 10px 3px;
+  padding: 6px 6px 3px 6px;
   width: 300px;
   display: flex;
+  background: white;
 `;
 
 const TextInput = styled.input`
@@ -60,5 +61,6 @@ const TextInput = styled.input`
 
 const Form = styled.form`
   display: flex;
+  height: 20px;
 `;
 export default SearchBar;

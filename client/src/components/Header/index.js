@@ -1,13 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { COLORS } from "../../constants";
+import { FiWind } from "react-icons/fi";
 
 import CartButton from "./CartButton";
 
 const Header = () => {
   return (
     <Wrapper>
-      <TitleLink to={"/"}>620 SQUARE MILES</TitleLink>
+      <TitleLink to={"/"}>
+        620sqm <FiWind />
+      </TitleLink>
+
       <CartButton />
     </Wrapper>
   );
@@ -15,20 +20,22 @@ const Header = () => {
 
 const Wrapper = styled.header`
   margin: 0;
-  margin-bottom: 20px;
-  padding: 30px 20px 10px;
+  padding: 0 0 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid black;
+  background: ${COLORS.primary};
 `;
 
 const TitleLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 800;
-  font-size: 32px;
+  font-size: 24px;
   grid-area: header;
   text-decoration: none;
-  color: black;
+  color: white;
 `;
 
 export default Header;
