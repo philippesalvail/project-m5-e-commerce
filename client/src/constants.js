@@ -7,8 +7,10 @@ export const COLORS = {
   light: "#3282b8",
   // Lightest blue
   lightest: "#bbe1fa",
-  // red
+  // dark red
   red: "#931a25",
+  // bright red
+  warning: "#ff414d",
   // yellow
   yellow: "#e1ad01",
 };

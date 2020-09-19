@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { COLORS } from "../../constants";
 
 import {
   purchaseCartItemsRequest,
@@ -45,7 +46,7 @@ const PurchaseButton = ({ cartItems }) => {
 
 const CartButton = styled.button`
   border-radius: 12px;
-  background: #e1ad01;
+  background: ${COLORS.yellow};
   color: white;
   border: none;
   padding: 8px;
