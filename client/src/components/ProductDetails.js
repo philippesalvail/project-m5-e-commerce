@@ -86,7 +86,7 @@ function ProductDetails() {
                         </DecrementBtn>
                         <QtySelected placeholder={quantity} />
                         <IncrementBtn
-                          onChange={() => {
+                          onClick={() => {
                             increaseQtyPurchase();
                           }}
                         >
