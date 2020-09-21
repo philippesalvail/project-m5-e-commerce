@@ -47,84 +47,99 @@ function ProductDetails() {
   }, [item]);
 
   return (
-    <>
+    <Wrapper>
       {productDetails && companyDetails && productPurchase ? (
         <DetailPage>
-          <Product>
-            <Img src={productDetails.imageSrc} />
-            <Description>
-              {/* <Category>{productDetails.category}</Category> */}
-              <NameAndPrice>
-                <Name>{productDetails.name}</Name>
-                <Price>{productDetails.price}</Price>
-              </NameAndPrice>
-              <Item>
-                {productDetails.numInStock === 0 ? (
-                  <OutOfStockLbl>Out Of Stock</OutOfStockLbl>
-                ) : (
-                  <QtyAndBackGround>
-                    {productDetails.numInStock <= 2 &&
-                    productDetails.numInStock > 0 ? (
-                      <QtyWrapper>
-                        <QtyRemaining>
-                          Only {productDetails.numInStock} Remaining!!
-                        </QtyRemaining>
-                      </QtyWrapper>
-                    ) : (
-                      <></>
-                    )}
+          <div
+            style={{
+              width: "100vw",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Product
+              style={{
+                margin: "80px",
+              }}
+            >
+              <Img src={productDetails.imageSrc} />
+              <Description>
+                <NameAndPrice>
+                  <Name>{productDetails.name}</Name>
+                  <Price>{productDetails.price}</Price>
+                </NameAndPrice>
+                <Item>
+                  {productDetails.numInStock === 0 ? (
+                    <OutOfStockLbl>Out Of Stock</OutOfStockLbl>
+                  ) : (
+                    <QtyAndBackGround>
+                      {productDetails.numInStock <= 2 &&
+                      productDetails.numInStock > 0 ? (
+                        <QtyWrapper>
+                          <QtyRemaining>
+                            Only {productDetails.numInStock} Remaining!
+                          </QtyRemaining>
+                        </QtyWrapper>
+                      ) : (
+                        <></>
+                      )}
 
-                    <QtyForm>
-                      <QtySelection>
-                        <QtyLbl>Qty: </QtyLbl>
-                        <DecrementBtn
-                          onClick={() => {
-                            decreaseQtyPurchase();
-                          }}
-                        >
-                          -
-                        </DecrementBtn>
-                        <QtySelected placeholder={quantity} />
-                        <IncrementBtn
-                          onClick={() => {
-                            increaseQtyPurchase();
-                          }}
-                        >
-                          +
-                        </IncrementBtn>
-                      </QtySelection>
-                      <ButtonWrapper>
-                        <AddToCarButton
-                          item={productDetails}
-                          quantity={quantity}
-                        />
-                      </ButtonWrapper>
-                    </QtyForm>
-                  </QtyAndBackGround>
+                      <QtyForm>
+                        <QtySelection>
+                          <QtyLbl>Qty: </QtyLbl>
+                          <DecrementBtn
+                            onClick={() => {
+                              decreaseQtyPurchase();
+                            }}
+                          >
+                            -
+                          </DecrementBtn>
+                          <QtySelected placeholder={quantity} />
+                          <IncrementBtn
+                            onClick={() => {
+                              increaseQtyPurchase();
+                            }}
+                          >
+                            +
+                          </IncrementBtn>
+                        </QtySelection>
+                      </QtyForm>
+                    </QtyAndBackGround>
+                  )}
+                </Item>
+                <CompanyDetails>
+                  <NameLbl>
+                    Seller:{" "}
+                    <WebSite href={companyDetails.url} target="_blank">
+                      {companyDetails.name}
+                    </WebSite>{" "}
+                  </NameLbl>
+                </CompanyDetails>
+                {productDetails.numInStock < 1 ? (
+                  <ButtonWrapper></ButtonWrapper>
+                ) : (
+                  <ButtonWrapper>
+                    <AddToCarButton item={productDetails} quantity={quantity} />
+                  </ButtonWrapper>
                 )}
-              </Item>
-              <CompanyDetails>
-                <NameLbl>
-                  Designed by:{" "}
-                  <WebSite href={companyDetails.url} target="_blank">
-                    {companyDetails.name}
-                  </WebSite>{" "}
-                </NameLbl>
-              </CompanyDetails>
-              <Wrapper>
-                <WornLbl>Worn on: {productDetails.body_location}</WornLbl>
-                <CountryLbl>Made in: {companyDetails.country}</CountryLbl>
-              </Wrapper>
-            </Description>
-          </Product>
+              </Description>
+            </Product>
+          </div>
           <SimilarItemsDisplay similarItems={similarItems} />
         </DetailPage>
       ) : (
         <LoadingSpinner />
       )}
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const OutOfStockLbl = styled.div`
   color: red;
@@ -172,12 +187,12 @@ const QtyForm = styled.div`
   justify-content: space-between;
 `;
 
-const ButtonWrapper = styled.div``;
-
-const Wrapper = styled.div`
+const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 20px;
 `;
 
 const CompanyDetails = styled.div`
@@ -191,13 +206,8 @@ const WebSite = styled.a`
 `;
 
 const Img = styled.img`
-  box-shadow: 2px 2px 2px 2px #000;
-  margin-right: 2%;
-  flex: 1;
-  text-align: center;
-  padding: 2%;
-  width: 100%;
-  height: 100%;
+  width: 250px;
+  margin: 20px 30px 20px 20px;
 `;
 
 const Item = styled.div``;
@@ -208,16 +218,9 @@ const QtyLbl = styled.label`
 const NameLbl = styled.p`
   font-size: 20px;
 `;
-const WornLbl = styled.div`
-  font-size: 20px;
-  text-align: center;
-`;
-const CountryLbl = styled.div`
-  font-size: 20px;
-`;
 
 const QtyRemaining = styled.label`
-  color: red;
+  color: ${COLORS.red};
   font-size: 1.25em;
   margin-bottom: 3%;
 `;
@@ -227,19 +230,13 @@ const QtyAndBackGround = styled.div``;
 const QtySelection = styled.div``;
 
 const Product = styled.div`
-  position: relative;
   display: flex;
   width: 70%;
-  margin: 0 auto;
-  border: 1px solid gray;
-  padding: 2%;
-  border-radius: 25px;
 `;
 
 const Description = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 3;
 `;
 
 const NameAndPrice = styled.div`
@@ -252,7 +249,7 @@ const Name = styled.h3`
 const Price = styled.h2`
   flex: 1;
   text-align: right;
-  margin-top: 0;
+  color: gray;
 `;
 
 export default ProductDetails;
