@@ -33,7 +33,7 @@ const SimilarItemsDisplay = ({ similarItems }) => {
 
 const Wrapper = styled.div`
   background: gainsboro;
-  padding-bottom: 80px;
+  padding-bottom: 0;
 `;
 
 const Bottom = styled.div`
