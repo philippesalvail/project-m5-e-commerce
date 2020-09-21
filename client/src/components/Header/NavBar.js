@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { COLORS } from "../../constants";
-import UnstyledButton from "../UnstyledButton";
 
 import { changeCategoryFilter } from "../../actions";
 import SearchBar from "./SearchBar";
