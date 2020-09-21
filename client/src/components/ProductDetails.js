@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import AddToCarButton from "./AddToCartButton";
 import SimilarItemsDisplay from "./SimilarItemsDisplay";
-import { NavLink } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
+import { COLORS } from "../constants";
 
 import {
   requestProductDetail,
@@ -76,7 +76,7 @@ function ProductDetails() {
 
                     <QtyForm>
                       <QtySelection>
-                        <QtyLbl>Desired Qty: </QtyLbl>
+                        <QtyLbl>Qty: </QtyLbl>
                         <DecrementBtn
                           onClick={() => {
                             decreaseQtyPurchase();
@@ -132,31 +132,30 @@ const OutOfStockLbl = styled.div`
   text-align: right;
 `;
 
-const BackContainer = styled.div`
-  margin-top: 3%;
-  text-align: center;
-`;
-
-const BackLink = styled(NavLink)`
-  text-decoration: none;
-  font-size: 1.5em;
-  text-align: center;
-  &:hover {
-    background-color: lightgreen;
-    padding: 2%;
-    border-radius: 25px;
-    color: #ff4500;
-  }
-`;
-
 const DetailPage = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const IncrementBtn = styled.button``;
+const IncrementBtn = styled.button`
+  background: ${COLORS.yellow};
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin: 3px;
+`;
 
-const DecrementBtn = styled.button``;
+const DecrementBtn = styled.button`
+  background: ${COLORS.yellow};
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin: 3px;
+`;
 
 const QtySelected = styled.input`
   text-align: center;

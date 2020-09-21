@@ -69,7 +69,9 @@ const Cart = () => {
                   );
                 })
               ) : (
-                <span style={{ fontStyle: "italic" }}>Your cart is empty.</span>
+                <div style={{ fontStyle: "italic", marginTop: "100px" }}>
+                  Your cart is empty.
+                </div>
               )}
             </CartItemContainer>
           </BagBody>
@@ -110,7 +112,7 @@ const Cart = () => {
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100vw;
   min-height: 100vh;
   background: gainsboro;
@@ -167,8 +169,10 @@ const BuyWrapper = styled.div`
 `;
 
 const BuyGrid = styled.div`
+  padding-top: 25px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  row-gap: 15px;
 `;
 
 const ButtonWrapper = styled.div`
