@@ -3,6 +3,7 @@ import produce from "immer";
 const initialState = {};
 
 export default function cartReducer(state = initialState, action) {
+  console.log("action in cartReducer: ", action);
   switch (action.type) {
     case "ADD_CART_ITEM":
       return !state[action.cartItem._id]
@@ -25,8 +26,8 @@ export default function cartReducer(state = initialState, action) {
         draftState[action.id].quantity = Number(action.input);
       });
 
-    case "CLEAR_CART":
-      return {};
+    // case "CLEAR_CART":
+    //   return {};
 
     default:
       return state;

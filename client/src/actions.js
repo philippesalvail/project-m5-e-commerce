@@ -80,3 +80,8 @@ export const purchaseCartItemsError = (error) => ({
   type: "PURCHASE_CART_ITEMS_ERROR",
   error,
 });
+export const addToPurchaseDataBase = (name, item) => ({
+  type: "ADD_TO_PURCHASE_DATABASE",
+  name,
+  item,
+});

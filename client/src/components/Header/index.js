@@ -6,17 +6,35 @@ import { FiWind } from "react-icons/fi";
 
 import CartButton from "./CartButton";
 import NavBar from "./NavBar";
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginBtn from "../Login-Btn";
+import LogoutBtn from "../Logout-Btn";
 
 const Header = () => {
+  const { isAuthenticated } = useAuth0();
+  const { user } = useAuth0();
+  console.log("user: ", user);
+
   return (
     <Wrapper>
-      <TopHeader>
-        <TitleLink to={"/"}>
-          620sqm <FiWind />
-        </TitleLink>
+      {isAuthenticated ? (
+        <TopHeader>
+          <TitleLink to={"/"}>
+            620sqm <FiWind /> <div>Welcome: {user.name}</div> <LogoutBtn />
+          </TitleLink>
+          <CartButton />
+        </TopHeader>
+      ) : (
+        <TopHeader>
+          <TitleLink to={"/"}>
+            620sqm <FiWind />
+            <LoginBtn />
+          </TitleLink>
 
-        <CartButton />
-      </TopHeader>
+          <CartButton />
+        </TopHeader>
+      )}
+
       <NavBar />
     </Wrapper>
   );
