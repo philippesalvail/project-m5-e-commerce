@@ -1,14 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 import { v4 as uuidv4 } from "uuid";
 const ConfirmationPage = () => {
   const state = useSelector((state) => state.cart);
   const cartItems = Object.values(state);
-  const { user } = useAuth0();
+  //   const { user } = useAuth0();
 
   const key = uuidv4();
+
+  console.log("key: ", key);
 
   return (
     <OrderSummary>
@@ -16,15 +18,14 @@ const ConfirmationPage = () => {
         <OrderTitle>Thank you for your order</OrderTitle>
         <OrderConfirmation>
           <h3>ORDER CONFIRMATION</h3>
-          <h4></h4>
+          <h4>{key}</h4>
         </OrderConfirmation>
         <CustomerInfo>
           <h4>Order by: </h4>
-          <div>{user.name}</div>
+          <div>Name of Customer</div>
         </CustomerInfo>
       </OrderBanner>
       <OrderDetails>
-        <CustomerImg />
         <CustomerPurchases>
           {cartItems.map((item) => {
             return (
