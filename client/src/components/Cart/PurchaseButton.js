@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { COLORS } from "../../constants";
+import { useHistory } from "react-router-dom";
 
 import {
   purchaseCartItemsRequest,
@@ -11,6 +12,7 @@ import {
 } from "../../actions";
 
 const PurchaseButton = ({ cartItems }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const handlePurchase = (event) => {
@@ -34,6 +36,7 @@ const PurchaseButton = ({ cartItems }) => {
         console.log(data);
         dispatch(purchaseCartItemsReceive());
         dispatch(clearCart());
+        history.push("/confirmationPage");
       })
       .catch((error) => {
         console.error("Error:", error);
