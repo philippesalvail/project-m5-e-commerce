@@ -76,6 +76,14 @@ const SearchBar = () => {
           onChange={(ev) => {
             setInput(ev.target.value);
           }}
+          onBlur={() => {
+            if (isSuggestionsOpen) {
+              setTimeout(() => {
+                setIsSuggestionsOpen(false);
+                setAlreadyCalled(false);
+              }, 100);
+            }
+          }}
           onKeyDown={(ev) => {
             switch (ev.key) {
               case "Enter": {
@@ -123,26 +131,28 @@ const SearchBar = () => {
       </Form>
       <SuggestionList>
         {showSuggestions &&
-          matchedProducts.map((product) => {
-            const index = matchedProducts.indexOf(product);
-            const isSelected = index === selectedSuggestionIndex;
+          matchedProducts.map((product, indx) => {
+            if (indx <= 10) {
+              const index = matchedProducts.indexOf(product);
+              const isSelected = index === selectedSuggestionIndex;
 
-            return (
-              <Suggestion
-                key={product._id}
-                input={input.toLowerCase()}
-                product={product}
-                index={index}
-                isSelected={isSelected}
-                onMouseEnter={() => setSelectedSuggestionIndex(index)}
-                onClick={(ev) => {
-                  ev.preventDefault();
-                  history.push(`/item/${product._id}`);
-                }}
-              >
-                {product.name}
-              </Suggestion>
-            );
+              return (
+                <Suggestion
+                  key={product._id}
+                  input={input.toLowerCase()}
+                  product={product}
+                  index={index}
+                  isSelected={isSelected}
+                  onMouseEnter={() => setSelectedSuggestionIndex(index)}
+                  onClick={(ev) => {
+                    ev.preventDefault();
+                    history.push(`/item/${product._id}`);
+                  }}
+                >
+                  {product.name}
+                </Suggestion>
+              );
+            }
           })}
       </SuggestionList>
     </Wrapper>
@@ -153,7 +163,7 @@ const Wrapper = styled.div`
   position: relative;
   border-radius: 20px;
   padding: 6px 6px 3px 6px;
-  width: 300px;
+  width: 400px;
   display: flex;
   background: white;
 `;
@@ -175,11 +185,10 @@ const Form = styled.form`
 
 const SuggestionList = styled.ul`
   position: absolute;
-  border: red 1px solid;
   top: 30px;
   left: 30px;
-  padding: 5px 10px;
-  width: 250px;
+  padding: 0px;
+  width: 375px;
   box-shadow: 0px 14px 46px -9px rgba(0, 0, 0, 0.75);
 
   & li {
