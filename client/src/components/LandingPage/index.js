@@ -23,7 +23,7 @@ const LandingPage = () => {
   React.useEffect(() => {
     const fetchUrl =
       currentCategory === "search"
-        ? `search/${searchInput}`
+        ? `/search/${searchInput}`
         : `/items/filter/${currentCategory}/`;
 
     dispatch(requestItemList());

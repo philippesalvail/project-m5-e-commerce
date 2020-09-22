@@ -32,9 +32,8 @@ export default function itemsReducer(state = initialState, action) {
       return produce(state, (draftState) => {
         draftState.currentCategory = action.filter;
         draftState.status = "loading";
-        draftState.searchInput = action.filter.includes("search")
-          ? action.searchInput
-          : null;
+        draftState.searchInput =
+          action.filter === "search" ? action.searchInput : null;
       });
 
     default:

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { COLORS } from "../../constants";
 
@@ -11,6 +11,9 @@ import SearchBar from "./SearchBar";
 const NavBar = () => {
   const dispatch = useDispatch();
   const { currentCategory } = useSelector((state) => state.items);
+
+  const location = useLocation();
+  //console.log(location.pathname);
 
   return (
     <Wrapper>
@@ -70,9 +73,7 @@ const NavBar = () => {
           Pets and Animals
         </CategoryButton>
       </div>
-      <div>
-        <SearchBar />
-      </div>
+      <div>{location.pathname === "/" && <SearchBar />}</div>
     </Wrapper>
   );
 };
