@@ -78,8 +78,10 @@ const SearchBar = () => {
           }}
           onBlur={() => {
             if (isSuggestionsOpen) {
-              setIsSuggestionsOpen(false);
-              setAlreadyCalled(false);
+              setTimeout(() => {
+                setIsSuggestionsOpen(false);
+                setAlreadyCalled(false);
+              }, 100);
             }
           }}
           onKeyDown={(ev) => {

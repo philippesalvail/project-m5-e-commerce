@@ -12,7 +12,7 @@ const Suggestion = ({ product, input, isSelected, onClick, onMouseEnter }) => {
     <Wrapper
       onClick={onClick}
       onMouseEnter={onMouseEnter}
-      style={{ background: isSelected ? "lightyellow" : "transparent" }}
+      style={{ background: isSelected ? "lightyellow" : "white" }}
     >
       <span>
         {firstHalf}
@@ -23,8 +23,10 @@ const Suggestion = ({ product, input, isSelected, onClick, onMouseEnter }) => {
 };
 
 const Wrapper = styled.li`
+  margin: 0px;
   padding: 5px;
   font-size: 14px;
+  background-color: white;
 `;
 
 const Prediction = styled.span`
