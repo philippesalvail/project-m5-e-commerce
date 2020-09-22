@@ -31,7 +31,12 @@ const CartItem = ({ item }) => {
         <ItemName>{item.name}</ItemName>
         <div style={{ margin: "5px 5px 15px 5px" }}>{item.price}</div>
         <FormWrapper>
-          <form style={{ marginTop: "10px" }}>
+          <form
+            style={{ marginTop: "10px" }}
+            onSubmit={(ev) => {
+              ev.preventDefault();
+            }}
+          >
             <StyledLabel htmlFor="quantity">Qty:</StyledLabel>
             <StyledInput
               type="text"

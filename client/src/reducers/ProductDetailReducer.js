@@ -15,14 +15,7 @@ export default function ProductDetailReducer(state = initialState, action) {
     case "RECEIVE_PRODUCT_DETAIL": {
       return {
         status: "idle",
-        currentProduct: {
-          body_location: action.detail.itemDetails.body_location,
-          category: action.detail.itemDetails.category,
-          name: action.detail.itemDetails.name,
-          imageSrc: action.detail.itemDetails.imageSrc,
-          numInStock: action.detail.itemDetails.numInStock,
-          price: action.detail.itemDetails.price,
-        },
+        currentProduct: action.detail.itemDetails,
         currentCompany: {
           name: action.detail.company.name,
           country: action.detail.company.country,
