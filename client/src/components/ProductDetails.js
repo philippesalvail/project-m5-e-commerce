@@ -82,7 +82,9 @@ function ProductDetails() {
                           </QtyRemaining>
                         </QtyWrapper>
                       ) : (
-                        <></>
+                        <QtyWrapper>
+                          <QtyRemaining></QtyRemaining>
+                        </QtyWrapper>
                       )}
 
                       <QtyForm>
