@@ -1,12 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 // import { useAuth0 } from "@auth0/auth0-react";
 import { v4 as uuidv4 } from "uuid";
 const ConfirmationPage = () => {
   const state = useSelector((state) => state.cart);
+
   const cartItems = Object.values(state);
-  //   const { user } = useAuth0();
+  const location = useLocation();
+  const myCart = location.state.cart;
+
+  console.log("myCart: ", myCart);
 
   const key = uuidv4();
 

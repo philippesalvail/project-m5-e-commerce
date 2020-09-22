@@ -35,8 +35,8 @@ const PurchaseButton = ({ cartItems }) => {
       .then((data) => {
         console.log(data);
         dispatch(purchaseCartItemsReceive());
-        // dispatch(clearCart());
-        history.push("/confirmationPage");
+        dispatch(clearCart());
+        history.push("/confirmationPage", { cart: arr });
       })
       .catch((error) => {
         console.error("Error:", error);
