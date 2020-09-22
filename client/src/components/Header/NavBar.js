@@ -93,7 +93,6 @@ const CategoryButton = styled(Link)`
   font-size: 16px;
   color: white;
   border: none;
-  outline: none;
   cursor: pointer;
   text-decoration: none;
 
