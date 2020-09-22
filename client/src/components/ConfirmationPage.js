@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 const ConfirmationPage = () => {
   const state = useSelector((state) => state.cart);
+  console.log("state in confirmation page: ", state);
   const cartItems = Object.values(state);
-  //   const { user } = useAuth0();
 
   const key = uuidv4();
 

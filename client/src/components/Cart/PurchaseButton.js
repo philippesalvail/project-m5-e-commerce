@@ -14,11 +14,9 @@ import {
 const PurchaseButton = ({ cartItems }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-
   const handlePurchase = (event) => {
     event.preventDefault();
     dispatch(purchaseCartItemsRequest());
-
     let arr = [];
     cartItems.forEach((item) => {
       arr.push({ [item._id]: item.quantity });
@@ -35,8 +33,8 @@ const PurchaseButton = ({ cartItems }) => {
       .then((data) => {
         console.log(data);
         dispatch(purchaseCartItemsReceive());
-        dispatch(clearCart());
-        history.push("/confirmationPage");
+        history.push("/ConfirmationPage");
+        // dispatch(clearCart());
       })
       .catch((error) => {
         console.error("Error:", error);

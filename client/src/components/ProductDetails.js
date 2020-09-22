@@ -15,13 +15,17 @@ import {
 
 function ProductDetails() {
   const item = useParams().itemId;
+
   const productDetails = useSelector((state) => state.product.currentProduct);
   const companyDetails = useSelector((state) => state.product.currentCompany);
-  const productPurchase = useSelector((state) => state.purchase);
   const similarItems = useSelector((state) => state.product.similarItems);
+  const productPurchase = useSelector((state) => state.purchase);
+
   const loadingState = useSelector((state) => state.status);
   const [quantity, setQuantity] = React.useState(1);
   const dispatch = useDispatch();
+
+  console.log("productDetails: ", productDetails);
 
   const increaseQtyPurchase = () => {
     if (quantity < productDetails.numInStock) {

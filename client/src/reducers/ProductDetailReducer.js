@@ -5,6 +5,7 @@ const initialState = {
 };
 
 export default function ProductDetailReducer(state = initialState, action) {
+  console.log("action ProductDetailReducer: ", action.detail);
   switch (action.type) {
     case "REQUEST_PRODUCT_DETAIL": {
       return {
@@ -15,19 +16,8 @@ export default function ProductDetailReducer(state = initialState, action) {
     case "RECEIVE_PRODUCT_DETAIL": {
       return {
         status: "idle",
-        currentProduct: {
-          body_location: action.detail.itemDetails.body_location,
-          category: action.detail.itemDetails.category,
-          name: action.detail.itemDetails.name,
-          imageSrc: action.detail.itemDetails.imageSrc,
-          numInStock: action.detail.itemDetails.numInStock,
-          price: action.detail.itemDetails.price,
-        },
-        currentCompany: {
-          name: action.detail.company.name,
-          country: action.detail.company.country,
-          url: action.detail.company.url,
-        },
+        currentProduct: action.detail.itemDetails,
+        currentCompany: action.detail.company,
         similarItems: action.detail.similarItems,
       };
     }
