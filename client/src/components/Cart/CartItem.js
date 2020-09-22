@@ -53,7 +53,6 @@ const CartItem = ({ item }) => {
         <CloseButton
           onClick={(ev) => {
             ev.stopPropagation();
-            console.log("id", item._id);
             dispatch(removeCartItem(item._id));
           }}
         >
