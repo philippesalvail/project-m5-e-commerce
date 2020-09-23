@@ -6,10 +6,11 @@ const initialState = {
   itemList: null,
   error: null,
   searchInput: null,
+  allItems: null,
 };
 
 export default function itemsReducer(state = initialState, action) {
-  //console.log(action);
+  console.log(action);
   switch (action.type) {
     case "ITEM_LIST_REQUEST":
       return produce(state, (draftState) => {
@@ -34,6 +35,10 @@ export default function itemsReducer(state = initialState, action) {
         draftState.status = "loading";
         draftState.searchInput =
           action.filter === "search" ? action.searchInput : null;
+      });
+    case "RECEIVE_ALL_ITEMS":
+      return produce(state, (draftState) => {
+        draftState.allItems = action.items;
       });
 
     default:

@@ -1,16 +1,45 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-// import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+
 const ConfirmationPage = () => {
-  const state = useSelector((state) => state.cart);
-  const cartItems = Object.values(state);
-  //   const { user } = useAuth0();
+  const allItems = useSelector((state) => state.items.allItems);
+  const location = useLocation();
+  const myCart = location.state.cart;
+  let cartItems = [];
+  let totalPrice = 0;
+  if (allItems) {
+    myCart.forEach(function (obj, index) {
+      for (let key in obj) {
+        for (let i = 0; i < allItems.length; i++) {
+          if (allItems[i]._id == key) {
+            let totalSubPrice = (
+              allItems[i].price.substring(1) * obj[key]
+            ).toFixed(2);
+            totalPrice += parseFloat(totalSubPrice);
+            totalSubPrice = "$" + totalSubPrice;
+            let product = {
+              id: allItems[i]._id,
+              name: allItems[i].name,
+              qty: obj[key],
+              price: totalSubPrice,
+            };
+            cartItems.push(product);
+          }
+        }
+      }
+    });
+  }
+
+  myCart.forEach(function (obj, index) {
+    for (var key in obj) {
+      console.log(key, obj[key]);
+    }
+  });
 
   const key = uuidv4();
-
-  console.log("key: ", key);
 
   return (
     <OrderSummary>
@@ -30,16 +59,33 @@ const ConfirmationPage = () => {
           {cartItems.map((item) => {
             return (
               <CustomerItem>
-                <Product>{item.name}</Product>
-                <Price>{item.price}</Price>
+                <ProductName>{item.name}</ProductName>
+                {item.qty > 1 && (
+                  <ProductQuantity>x {item.qty}</ProductQuantity>
+                )}
+                <ProductPrice>{item.price}</ProductPrice>
               </CustomerItem>
             );
           })}
+          <TotalPrice>
+            <TotalPriceLbl>Total Price: </TotalPriceLbl>
+            <TotalPriceQuote>${totalPrice} </TotalPriceQuote>
+          </TotalPrice>
         </CustomerPurchases>
       </OrderDetails>
     </OrderSummary>
   );
 };
+
+const TotalPrice = styled.div`
+  display: flex;
+  padding: 2%;
+  justify-content: space-between;
+`;
+
+const TotalPriceLbl = styled.h4``;
+
+const TotalPriceQuote = styled.h4``;
 
 const OrderTitle = styled.h2`
   padding: 2%;
@@ -51,13 +97,15 @@ const CustomerItem = styled.div`
   padding: 2%;
 `;
 
-const Product = styled.div`
+const ProductName = styled.div`
   width: 90%;
 `;
 
-const Price = styled.div``;
+const ProductPrice = styled.div``;
 
-const Quantity = styled.div``;
+const ProductQuantity = styled.h4`
+  text-align: left;
+`;
 
 const CustomerPurchases = styled.div`
   flex: 2;

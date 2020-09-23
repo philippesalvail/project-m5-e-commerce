@@ -42,7 +42,9 @@ function ProductDetails() {
     dispatch(requestProductDetail());
     fetch(`/item/${item}`)
       .then((response) => response.json())
-      .then((jsonObj) => dispatch(receiveProductDetail(jsonObj)))
+      .then((jsonObj) => {
+        dispatch(receiveProductDetail(jsonObj));
+      })
       .catch((err) => dispatch(receiveProductError(err)));
   }, [item]);
 
