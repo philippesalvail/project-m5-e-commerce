@@ -12,6 +12,10 @@ export const receiveItemListError = (error) => ({
   type: "ITEM_LIST_FAILURE",
   error,
 });
+export const receiveAllItems = (items) => ({
+  type: "RECEIVE_ALL_ITEMS",
+  items,
+});
 
 export const changeCategoryFilter = (filter, searchInput) => ({
   type: "CHANGE_FILTER_CATEGORY",
