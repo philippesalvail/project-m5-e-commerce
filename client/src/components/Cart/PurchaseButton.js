@@ -11,13 +11,31 @@ import {
   clearCart,
 } from "../../actions";
 
+const calculateTotalPrice = (arr) => {
+  let totalPrice = 0;
+
+  if (arr.length > 0) {
+    arr.forEach((item) => {
+      const itemPrice = Number(item.price.replace(/[^0-9.-]+/g, "")) * 100;
+
+      if (item.quantity) {
+        totalPrice += itemPrice * item.quantity;
+      } else {
+        totalPrice += itemPrice;
+      }
+    });
+  }
+  return totalPrice.toFixed(2) / 100;
+};
+
 const PurchaseButton = ({ cartItems }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
   const handlePurchase = (event) => {
     event.preventDefault();
-    dispatch(purchaseCartItemsRequest());
+
+    dispatch(purchaseCartItemsRequest(calculateTotalPrice(cartItems)));
 
     let arr = [];
     cartItems.forEach((item) => {

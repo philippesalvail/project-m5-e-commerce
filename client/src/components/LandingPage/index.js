@@ -10,7 +10,6 @@ import {
   requestItemList,
   receiveItemList,
   receiveItemListError,
-  receiveAllItems,
 } from "../../actions";
 
 const LandingPage = () => {
@@ -20,12 +19,6 @@ const LandingPage = () => {
   );
 
   // console.log(currentCategory);
-  React.useEffect(() => {
-    fetch("/items")
-      .then((res) => res.json())
-      .then((items) => dispatch(receiveAllItems(items)))
-      .catch((error) => console.log(error));
-  }, []);
 
   React.useEffect(() => {
     const fetchUrl =

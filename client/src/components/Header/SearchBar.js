@@ -49,6 +49,7 @@ const SearchBar = () => {
           }
         });
     }
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [input]);
 
   const showSuggestions = matchedProducts.length >= 1 && isSuggestionsOpen;

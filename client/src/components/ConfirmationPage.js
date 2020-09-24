@@ -4,42 +4,52 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
-const ConfirmationPage = () => {
-  const allItems = useSelector((state) => state.items.allItems);
-  const location = useLocation();
-  const myCart = location.state.cart;
-  let cartItems = [];
-  let totalPrice = 0;
-  if (allItems) {
-    myCart.forEach(function (obj, index) {
-      for (let key in obj) {
-        for (let i = 0; i < allItems.length; i++) {
-          if (allItems[i]._id == key) {
-            let totalSubPrice = (
-              allItems[i].price.substring(1) * obj[key]
-            ).toFixed(2);
-            totalPrice += parseFloat(totalSubPrice);
-            totalSubPrice = "$" + totalSubPrice;
-            let product = {
-              id: allItems[i]._id,
-              name: allItems[i].name,
-              qty: obj[key],
-              price: totalSubPrice,
-            };
-            cartItems.push(product);
-          }
-        }
-      }
-    });
-  }
+import {
+  requestItemList,
+  receiveItemList,
+  receiveItemListError,
+} from "../actions";
 
-  myCart.forEach(function (obj, index) {
-    for (var key in obj) {
-      console.log(key, obj[key]);
-    }
+import LoadingSpinner from "./LoadingSpinner";
+
+const ConfirmationPage = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const { status, error, itemList } = useSelector((state) => state.items);
+  const totalPrice = useSelector((state) => state.purchase.totalPrice);
+
+  const myCart = location.state.cart;
+  let itemIds = "";
+
+  console.log(totalPrice);
+
+  myCart.forEach((item) => {
+    let itemId = Object.keys(item);
+    itemIds += `${itemId[0]},`;
   });
 
+  console.log(itemList);
+
+  React.useEffect(() => {
+    dispatch(requestItemList());
+    fetch(`/items/list/${itemIds}`)
+      .then((res) => res.json())
+      .then((itemList) => {
+        if (!itemList.Error) {
+          dispatch(receiveItemList(itemList));
+        } else {
+          dispatch(receiveItemListError(error));
+        }
+      })
+      .catch((error) => dispatch(receiveItemListError(error)));
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, []);
+
   const key = uuidv4();
+
+  if (status === "loading") {
+    return <LoadingSpinner />;
+  }
 
   return (
     <OrderSummary>
@@ -54,25 +64,27 @@ const ConfirmationPage = () => {
           <div>Name of Customer</div>
         </CustomerInfo>
       </OrderBanner>
-      <OrderDetails>
-        <CustomerPurchases>
-          {cartItems.map((item) => {
-            return (
-              <CustomerItem>
-                <ProductName>{item.name}</ProductName>
-                {item.qty > 1 && (
-                  <ProductQuantity>x {item.qty}</ProductQuantity>
-                )}
-                <ProductPrice>{item.price}</ProductPrice>
-              </CustomerItem>
-            );
-          })}
-          <TotalPrice>
-            <TotalPriceLbl>Total Price: </TotalPriceLbl>
-            <TotalPriceQuote>${totalPrice} </TotalPriceQuote>
-          </TotalPrice>
-        </CustomerPurchases>
-      </OrderDetails>
+      {status === "idle" && (
+        <OrderDetails>
+          <CustomerPurchases>
+            {itemList.map((item) => {
+              return (
+                <CustomerItem key={item.name}>
+                  <ProductName>{item.name}</ProductName>
+                  {item.qty > 1 && (
+                    <ProductQuantity>x {item.qty}</ProductQuantity>
+                  )}
+                  <ProductPrice>{item.price}</ProductPrice>
+                </CustomerItem>
+              );
+            })}
+            <TotalPrice>
+              <TotalPriceLbl>Total Price: </TotalPriceLbl>
+              <TotalPriceQuote>${totalPrice.toFixed(2)} </TotalPriceQuote>
+            </TotalPrice>
+          </CustomerPurchases>
+        </OrderDetails>
+      )}
     </OrderSummary>
   );
 };
@@ -137,7 +149,7 @@ const OrderBanner = styled.div`
 `;
 
 const OrderSummary = styled.div`
-  margin-up: 2%;
+  margin-top: 2%;
   width: 90%;
   margin: 0 auto;
   border: 1px solid black;

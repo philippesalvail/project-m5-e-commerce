@@ -2,16 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import AddToCarButton from "./AddToCartButton";
+import AddToCarButton from "../AddToCartButton";
 import SimilarItemsDisplay from "./SimilarItemsDisplay";
-import LoadingSpinner from "./LoadingSpinner";
-import { COLORS } from "../constants";
+import LoadingSpinner from "../LoadingSpinner";
+import { COLORS } from "../../constants";
 
 import {
   requestProductDetail,
   receiveProductDetail,
   receiveProductError,
-} from "../actions";
+} from "../../actions";
 
 function ProductDetails() {
   const item = useParams().itemId;
