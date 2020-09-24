@@ -47,8 +47,33 @@ const handleAllItems = (req, res) => {
   }, delay);
 };
 
+const handleItemList = (req, res) => {
+  const itemIds = req.params.itemList;
+  let itemList = [];
+
+  itemIdArr = itemIds.split(",");
+
+  //console.log(itemIdArr);
+
+  itemIdArr.forEach((itemId) => {
+    if (itemId) {
+      let itemIdNum = Number(itemId);
+      let itemToAdd = items.find((item) => item._id === itemIdNum);
+      itemList.push(itemToAdd);
+    }
+  });
+
+  //console.log(itemList);
+
+  const delay = Math.random() * 1250 + 500;
+  setTimeout(() => {
+    res.status(200).send(itemList);
+  }, delay);
+};
+
 module.exports = {
   handleItemsByCategory,
   handleItemsByCompany,
   handleAllItems,
+  handleItemList,
 };

@@ -6,7 +6,7 @@ import GlobalStyles from "./GlobalStyles";
 import Cart from "./Cart/index";
 import Header from "./Header";
 import LandingPage from "./LandingPage";
-import ProductDetails from "./ProductDetails";
+import ProductDetails from "./ProductDetail";
 import ConfirmationPage from "./ConfirmationPage";
 
 function App() {

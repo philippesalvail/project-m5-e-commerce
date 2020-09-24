@@ -8,6 +8,7 @@ const {
   handleItemsByCategory,
   handleItemsByCompany,
   handleAllItems,
+  handleItemList,
 } = require("./serverHandlers/handleItems");
 
 const { handleSearchItems } = require("./serverHandlers/handleSearch");
@@ -39,6 +40,7 @@ express()
   .get("/items/filter/:category", handleItemsByCategory)
   .get("/items/company/:companyId", handleItemsByCompany)
   .get("/items/", handleAllItems)
+  .get("/items/list/:itemList", handleItemList)
   .get("/item/:itemId", handleSingleItem)
   .get("/search/:input", handleSearchItems)
 
