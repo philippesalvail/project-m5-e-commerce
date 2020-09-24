@@ -69,7 +69,7 @@ const ConfirmationPage = () => {
           })}
           <TotalPrice>
             <TotalPriceLbl>Total Price: </TotalPriceLbl>
-            <TotalPriceQuote>${totalPrice} </TotalPriceQuote>
+            <TotalPriceQuote>${totalPrice.toFixed(2)} </TotalPriceQuote>
           </TotalPrice>
         </CustomerPurchases>
       </OrderDetails>
