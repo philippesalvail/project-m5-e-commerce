@@ -72,10 +72,11 @@ const ConfirmationPage = () => {
           <Checkmark />
           <h4>ORDER CONFIRMED</h4>
         </OrderConfirmation>
-        <CustomerInfo>
-          <h4>Order Summary: </h4>
-        </CustomerInfo>
       </OrderBanner>
+
+      <CustomerInfo>
+        <h4>Order Summary: </h4>
+      </CustomerInfo>
 
       {status === "idle" && (
         <OrderDetails>
@@ -181,7 +182,7 @@ const OrderSummary = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 30vw;
+  width: 50vw;
   height: 75vh;
   margin: 0 auto;
   margin-top: 20px;
