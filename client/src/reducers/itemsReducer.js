@@ -49,6 +49,8 @@ export default function itemsReducer(state = initialState, action) {
     case "RESET_FILTER_CATEGORY":
       return produce(state, (draftState) => {
         draftState.currentCategory = "";
+        draftState.itemList = null;
+        draftState.status = "loading";
       });
 
     default:
