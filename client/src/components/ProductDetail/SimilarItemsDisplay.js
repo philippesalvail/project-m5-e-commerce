@@ -3,17 +3,20 @@ import ListItem from "../LandingPage/ListItem";
 import styled from "styled-components";
 
 const SimilarItemsDisplay = ({ similarItems }) => {
-  let itemsChosen = [];
+  const [itemsChosen, setItemsChosen] = React.useState([]);
 
-  console.log("similarItems: ", similarItems);
+  //console.log("setSimilarItems: ", similarItems);
+  React.useEffect(() => {
+    for (let i = 0; i < 3 && i < similarItems.length; i++) {
+      let select =
+        similarItems[Math.floor(Math.random() * similarItems.length)];
 
-  for (let i = 0; i < 3 && i < similarItems.length; i++) {
-    let select = similarItems[Math.floor(Math.random() * similarItems.length)];
-
-    if (!itemsChosen.includes(select)) {
-      itemsChosen.push(select);
+      if (!itemsChosen.includes(select)) {
+        setItemsChosen((itemsChosen) => [...itemsChosen, select]);
+      }
+      console.log(itemsChosen);
     }
-  }
+  }, []);
 
   return (
     <Wrapper>
