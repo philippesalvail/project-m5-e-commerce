@@ -74,9 +74,8 @@ export const clearCart = () => ({
 
 // PURCHASE ACTIONS
 
-export const purchaseCartItemsRequest = (totalPrice) => ({
+export const purchaseCartItemsRequest = () => ({
   type: "PURCHASE_CART_ITEMS_REQUEST",
-  totalPrice,
 });
 
 export const purchaseCartItemsReceive = (status) => ({

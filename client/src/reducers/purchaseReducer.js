@@ -2,17 +2,15 @@ import produce from "immer";
 
 const initialState = {
   status: "idle",
-  totalPrice: 0,
   error: null,
 };
 
 export default function purchaseReducer(state = initialState, action) {
   switch (action.type) {
     case "PURCHASE_CART_ITEMS_REQUEST":
-      console.log(action.totalPrice);
+      //console.log(action.totalPrice);
       return produce(state, (draftState) => {
         draftState.status = "loading";
-        draftState.totalPrice = action.totalPrice;
       });
 
     case "PURCHASE_CART_ITEMS_RECEIVE":

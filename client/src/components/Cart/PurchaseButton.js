@@ -35,7 +35,7 @@ const PurchaseButton = ({ cartItems }) => {
   const handlePurchase = (event) => {
     event.preventDefault();
 
-    dispatch(purchaseCartItemsRequest(calculateTotalPrice(cartItems)));
+    dispatch(purchaseCartItemsRequest());
 
     let arr = [];
     cartItems.forEach((item) => {
