@@ -2,11 +2,10 @@ import produce from "immer";
 
 const initialState = {
   status: "loading",
-  currentCategory: "medical",
+  currentCategory: "fitness",
   itemList: null,
   error: null,
   searchInput: null,
-  allItems: null,
 };
 
 export default function itemsReducer(state = initialState, action) {
@@ -30,6 +29,12 @@ export default function itemsReducer(state = initialState, action) {
         draftState.error = action.error;
       });
     case "CHANGE_FILTER_CATEGORY":
+      if (action.filter === "reset") {
+        return produce(state, (draftState) => {
+          draftState.currentCategory = action.filter;
+          draftState.status = "idle";
+        });
+      }
       return produce(state, (draftState) => {
         draftState.currentCategory = action.filter;
         draftState.status = "loading";
@@ -39,6 +44,10 @@ export default function itemsReducer(state = initialState, action) {
     case "RECEIVE_ALL_ITEMS":
       return produce(state, (draftState) => {
         draftState.allItems = action.items;
+      });
+    case "RESET_FILTER_CATEGORY":
+      return produce(state, (draftState) => {
+        draftState.currentCategory = "";
       });
 
     default:

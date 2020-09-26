@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { COLORS } from "../../constants";
 
-import { changeCategoryFilter } from "../../actions";
+import { changeCategoryFilter, resetCategoryFilter } from "../../actions";
 import SearchBar from "./SearchBar";
 
 const NavBar = () => {
@@ -15,13 +15,18 @@ const NavBar = () => {
   const location = useLocation();
   //console.log(location.pathname);
 
-  if (location.pathname === "/") {
-    if (!currentCategory) {
-      dispatch(changeCategoryFilter("fitness"));
+  React.useEffect(() => {
+    if (location.pathname === "/") {
+      if (!currentCategory) {
+        dispatch(changeCategoryFilter("fitness"));
+      }
+    } else {
+      if (currentCategory) {
+        dispatch(resetCategoryFilter());
+      }
     }
-  } else {
-    dispatch(changeCategoryFilter(""));
-  }
+  }, [location.pathname]);
+
   return (
     <Wrapper>
       <div style={{ display: "flex" }}>
