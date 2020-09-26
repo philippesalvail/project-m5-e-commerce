@@ -113,7 +113,7 @@ const OrderTitle = styled.h2`
 const Divider = styled.div`
   height: 0;
   width: 95%;
-  border-top: 1px solid #666;
+  border-top: 1px dashed #666;
   margin: 0 auto;
 `;
 
