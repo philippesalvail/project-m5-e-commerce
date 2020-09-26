@@ -10,6 +10,7 @@ import {
   purchaseCartItemsError,
   clearCart,
   emptyCartError,
+  clearEmptyCartError,
 } from "../../actions";
 
 const calculateTotalPrice = (arr) => {
@@ -32,9 +33,7 @@ const calculateTotalPrice = (arr) => {
 const PurchaseButton = ({ cartItems }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.purchase.error);
-
-  let emptyCart = true;
+  const cartError = useSelector((state) => state.purchase.error);
 
   const handlePurchase = (event) => {
     event.preventDefault();
@@ -44,10 +43,9 @@ const PurchaseButton = ({ cartItems }) => {
     let arr = [];
     cartItems.forEach((item) => {
       arr.push({ [item._id]: item.quantity });
-      emptyCart = false;
     });
 
-    if (!emptyCart) {
+    if (arr.length > 0) {
       fetch("/buy", {
         method: "PATCH",
         headers: {
@@ -68,13 +66,16 @@ const PurchaseButton = ({ cartItems }) => {
         });
     } else {
       dispatch(emptyCartError());
+      window.setTimeout(() => {
+        dispatch(clearEmptyCartError());
+      }, 4000);
     }
   };
 
   return (
     <Wrapper>
       <CartButton onClick={handlePurchase}>purchase</CartButton>
-      {error ? <ErrorBanner>{error}</ErrorBanner> : <></>}
+      {cartError ? <ErrorBanner>{cartError}</ErrorBanner> : <></>}
     </Wrapper>
   );
 };
