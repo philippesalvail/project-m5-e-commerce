@@ -22,6 +22,9 @@ export const changeCategoryFilter = (filter, searchInput) => ({
   filter,
   searchInput,
 });
+export const resetCategoryFilter = (filter) => ({
+  type: "RESET_FILTER_CATEGORY",
+});
 
 export const requestProductDetail = () => ({
   type: "REQUEST_PRODUCT_DETAIL",
