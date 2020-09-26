@@ -14,7 +14,7 @@ const SimilarItemsDisplay = ({ similarItems }) => {
       if (!itemsChosen.includes(select)) {
         setItemsChosen((itemsChosen) => [...itemsChosen, select]);
       }
-      console.log(itemsChosen);
+      //console.log(itemsChosen);
     }
   }, []);
 
@@ -25,7 +25,7 @@ const SimilarItemsDisplay = ({ similarItems }) => {
         <Bottom>
           <Display>
             {itemsChosen.map((item) => {
-              console.log("item: ", item);
+              //console.log("item: ", item);
               return <ListItem key={item._id} item={item} />;
             })}
           </Display>
