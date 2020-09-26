@@ -6,7 +6,8 @@ import GlobalStyles from "./GlobalStyles";
 import Cart from "./Cart/index";
 import Header from "./Header";
 import LandingPage from "./LandingPage";
-import ProductDetails from "./ProductDetails";
+import ProductDetails from "./ProductDetail";
+import ConfirmationPage from "./ConfirmationPage";
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route exact path="/item/:itemId">
             <ProductDetails />
+          </Route>
+          <Route exact path="/confirmationPage">
+            <ConfirmationPage />
           </Route>
         </Switch>
       </Router>

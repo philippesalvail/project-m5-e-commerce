@@ -6,6 +6,7 @@ const initialState = {
   itemList: null,
   error: null,
   searchInput: null,
+  allItems: null,
 };
 
 export default function itemsReducer(state = initialState, action) {
@@ -32,9 +33,12 @@ export default function itemsReducer(state = initialState, action) {
       return produce(state, (draftState) => {
         draftState.currentCategory = action.filter;
         draftState.status = "loading";
-        draftState.searchInput = action.filter.includes("search")
-          ? action.searchInput
-          : null;
+        draftState.searchInput =
+          action.filter === "search" ? action.searchInput : null;
+      });
+    case "RECEIVE_ALL_ITEMS":
+      return produce(state, (draftState) => {
+        draftState.allItems = action.items;
       });
 
     default:
