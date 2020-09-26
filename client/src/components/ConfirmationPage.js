@@ -4,11 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { IoIosCheckmarkCircle } from "react-icons/io";
+import Error from "./Error";
 
 import {
   requestItemList,
   receiveItemList,
   receiveItemListError,
+  receiveOrderError,
+  receiveOrderId,
+  requestOrderId,
 } from "../actions";
 
 import LoadingSpinner from "./LoadingSpinner";
@@ -16,6 +20,9 @@ import LoadingSpinner from "./LoadingSpinner";
 const ConfirmationPage = () => {
   const dispatch = useDispatch();
   const { status, error, itemList } = useSelector((state) => state.items);
+  const orderStatus = useSelector((state) => state.order.status);
+  const orderError = useSelector((state) => state.order.error);
+
   let numTotalPrice = 0;
 
   const orderId = useParams().orderId;
@@ -24,34 +31,46 @@ const ConfirmationPage = () => {
 
   //console.log(orderId);
   React.useEffect(() => {
-    dispatch(requestItemList());
+    dispatch(requestOrderId());
     fetch(`/order/${orderId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.order);
-        let itemId = Object.keys(data.order);
-        let itemQty = Object.values(data.order);
-
-        itemId.forEach((itemId, index) => {
-          itemIds += `${itemId}-${itemQty[index]},`;
-        });
-        console.log(itemIds);
+        if (data.status !== "error") {
+          let itemId = Object.keys(data.order);
+          let itemQty = Object.values(data.order);
+          itemId.forEach((itemId, index) => {
+            itemIds += `${itemId}-${itemQty[index]},`;
+          });
+          dispatch(receiveOrderId());
+          console.log(itemIds);
+        } else {
+          dispatch(receiveOrderError(data.error));
+          return;
+        }
       })
       .then(() => {
-        fetch(`/items/list/${itemIds}`)
-          .then((res) => res.json())
-          .then((itemList) => {
-            if (!itemList.Error) {
-              dispatch(receiveItemList(itemList));
-            } else {
-              dispatch(receiveItemListError(error));
-            }
-          })
-          .catch((error) => dispatch(receiveItemListError(error)));
+        dispatch(requestItemList());
+        console.log(error);
+        if (status !== "error") {
+          fetch(`/items/list/${itemIds}`)
+            .then((res) => res.json())
+            .then((itemList) => {
+              if (!itemList.Error) {
+                dispatch(receiveItemList(itemList));
+              } else {
+                dispatch(receiveItemListError(error));
+              }
+            })
+            .catch((error) => dispatch(receiveItemListError(error)));
+        }
       });
 
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
+
+  if (orderStatus === "error") {
+    return <Error>{`${orderError}`}</Error>;
+  }
 
   if (status === "loading") {
     return <LoadingSpinner />;

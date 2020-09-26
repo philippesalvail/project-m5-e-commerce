@@ -10,7 +10,7 @@ const handleOrderInfo = (req, res) => {
   console.log("matchedOrder:", matchedOrder);
 
   if (!matchedOrder) {
-    res.status(400).send({ status: "error", error: "order not found" });
+    res.status(400).send({ status: "error", error: "Order not found." });
   }
 
   res.status(200).send({ status: "success", order: matchedOrder });
