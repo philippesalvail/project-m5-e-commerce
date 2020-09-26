@@ -24,6 +24,7 @@ export default function itemsReducer(state = initialState, action) {
       });
 
     case "ITEM_LIST_FAILURE":
+      console.log(action.error);
       return produce(state, (draftState) => {
         draftState.status = "error";
         draftState.error = action.error;

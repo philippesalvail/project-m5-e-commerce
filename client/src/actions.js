@@ -95,3 +95,18 @@ export const emptyCartError = () => ({
 export const clearEmptyCartError = () => ({
   type: "CLEAR_EMPTY_CART_ERROR",
 });
+
+// ORDER REQUEST ACTIONS
+
+export const requestOrderId = () => ({
+  type: "ORDER_REQUEST",
+});
+
+export const receiveOrderId = () => ({
+  type: "ORDER_RECEIVE",
+});
+
+export const receiveOrderError = (error) => ({
+  type: "ORDER_ERROR",
+  error,
+});
