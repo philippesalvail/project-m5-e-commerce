@@ -8,6 +8,7 @@ const handlePurchase = (req, res) => {
   newOrderId = uuid.slice(0, 13);
 
   let newOrder = {};
+  let error = false;
 
   purchaseArray.forEach((element) => {
     const [id] = Object.keys(element);
@@ -16,22 +17,26 @@ const handlePurchase = (req, res) => {
     items.forEach((element) => {
       if (element._id === Number(id)) {
         if (element.numInStock < quantity) {
-          throw new Error("You attempted to buy too many items");
-        } else {
-          element.numInStock -= quantity;
-          newOrder[id] = quantity;
+          error = true;
+          res.status(400).send({
+            error: `There isn't ${quantity} items of this product in stock`,
+          });
         }
       }
+      element.numInStock -= quantity;
+      newOrder[id] = quantity;
     });
   });
   // console.log(newOrderId, newOrder);
-  orders[newOrderId] = newOrder;
-  console.log(orders);
+  if (!error) {
+    orders[newOrderId] = newOrder;
+    console.log(orders);
 
-  const delay = Math.random() * 1250 + 500;
-  setTimeout(() => {
-    res.status(200).send({ status: "success", orderId: newOrderId });
-  }, delay);
+    const delay = Math.random() * 1250 + 500;
+    setTimeout(() => {
+      res.status(200).send({ status: "success", orderId: newOrderId });
+    }, delay);
+  }
 };
 
 module.exports = {

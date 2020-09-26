@@ -55,15 +55,18 @@ const PurchaseButton = ({ cartItems }) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          //console.log(data);
-          dispatch(purchaseCartItemsReceive());
-          dispatch(clearCart());
-          history.push(`/confirmation-page/${data.orderId}`);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          dispatch(purchaseCartItemsError(error));
+          if (!data.error) {
+            dispatch(purchaseCartItemsReceive());
+            dispatch(clearCart());
+            history.push(`/confirmation-page/${data.orderId}`);
+          } else {
+            dispatch(purchaseCartItemsError(data.error));
+          }
         });
+      // .catch((error) => {
+      //   console.error("Error:", error);
+      //   dispatch(purchaseCartItemsError(error));
+      // });
     } else {
       dispatch(emptyCartError());
       window.setTimeout(() => {
@@ -113,12 +116,14 @@ const ErrorBanner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   margin-top: 15px;
+  padding: 15px;
   background: ${COLORS.warning};
   color: white;
   width: 150px;
   height: 40px;
-  border-radius: 5px;
+  border-radius: 4px;
 `;
 
 export default PurchaseButton;
