@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import {
   requestItemList,
@@ -13,33 +13,41 @@ import LoadingSpinner from "./LoadingSpinner";
 
 const ConfirmationPage = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const { status, error, itemList } = useSelector((state) => state.items);
   let numTotalPrice = 0;
 
-  const myCart = location.state.cart;
+  const orderId = useParams().orderId;
+
   let itemIds = "";
 
-  //console.log(itemList);
-
-  myCart.forEach((item) => {
-    let itemId = Object.keys(item);
-    let itemQty = Object.values(item);
-    itemIds += `${itemId[0]}-${itemQty[0]},`;
-  });
-
+  //console.log(orderId);
   React.useEffect(() => {
     dispatch(requestItemList());
-    fetch(`/items/list/${itemIds}`)
+    fetch(`/order/${orderId}`)
       .then((res) => res.json())
-      .then((itemList) => {
-        if (!itemList.Error) {
-          dispatch(receiveItemList(itemList));
-        } else {
-          dispatch(receiveItemListError(error));
-        }
+      .then((data) => {
+        console.log(data.order);
+        let itemId = Object.keys(data.order);
+        let itemQty = Object.values(data.order);
+
+        itemId.forEach((itemId, index) => {
+          itemIds += `${itemId}-${itemQty[index]},`;
+        });
+        console.log(itemIds);
       })
-      .catch((error) => dispatch(receiveItemListError(error)));
+      .then(() => {
+        fetch(`/items/list/${itemIds}`)
+          .then((res) => res.json())
+          .then((itemList) => {
+            if (!itemList.Error) {
+              dispatch(receiveItemList(itemList));
+            } else {
+              dispatch(receiveItemListError(error));
+            }
+          })
+          .catch((error) => dispatch(receiveItemListError(error)));
+      });
+
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
