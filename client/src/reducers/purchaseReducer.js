@@ -27,6 +27,12 @@ export default function purchaseReducer(state = initialState, action) {
         draftState.error = action.error;
       });
 
+    case "EMPTY_CART_ERROR":
+      return produce(state, (draftState) => {
+        draftState.status = "error";
+        draftState.error = "Your cart is empty!";
+      });
+
     default:
       return state;
   }
