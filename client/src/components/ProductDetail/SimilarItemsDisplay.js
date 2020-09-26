@@ -14,11 +14,9 @@ const SimilarItemsDisplay = ({ similarItems }) => {
       let select =
         similarItems[Math.floor(Math.random() * similarItems.length)];
 
-      console.log(tempArray, select);
       if (!tempArray.includes(select)) {
         tempArray.push(select);
       }
-      //console.log(itemsChosen);
     }
     setItemsChosen(tempArray);
   }, [location.pathname]);
