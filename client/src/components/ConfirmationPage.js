@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
 import {
   requestItemList,
@@ -16,7 +15,7 @@ const ConfirmationPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { status, error, itemList } = useSelector((state) => state.items);
-  const totalPrice = useSelector((state) => state.purchase.totalPrice);
+  let numTotalPrice = 0;
 
   const myCart = location.state.cart;
   let itemIds = "";
@@ -44,10 +43,15 @@ const ConfirmationPage = () => {
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
-  const key = uuidv4();
-
   if (status === "loading") {
     return <LoadingSpinner />;
+  }
+
+  if (status === "idle") {
+    itemList.forEach((item) => {
+      let numPrice = Number(item.price.split("$")[1]);
+      numTotalPrice += numPrice * item.qty;
+    });
   }
 
   return (
@@ -78,7 +82,7 @@ const ConfirmationPage = () => {
             <Divider />
             <TotalPrice>
               <TotalPriceLbl>Total Price: </TotalPriceLbl>
-              <TotalPriceQuote>${totalPrice.toFixed(2)} </TotalPriceQuote>
+              <TotalPriceQuote>${numTotalPrice.toFixed(2)} </TotalPriceQuote>
             </TotalPrice>
           </CustomerPurchases>
         </OrderDetails>
