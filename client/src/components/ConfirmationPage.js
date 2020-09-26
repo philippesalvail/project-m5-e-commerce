@@ -21,14 +21,13 @@ const ConfirmationPage = () => {
   const myCart = location.state.cart;
   let itemIds = "";
 
-  console.log(totalPrice);
+  //console.log(itemList);
 
   myCart.forEach((item) => {
     let itemId = Object.keys(item);
-    itemIds += `${itemId[0]},`;
+    let itemQty = Object.values(item);
+    itemIds += `${itemId[0]}-${itemQty[0]},`;
   });
-
-  console.log(itemList);
 
   React.useEffect(() => {
     dispatch(requestItemList());
@@ -56,12 +55,10 @@ const ConfirmationPage = () => {
       <OrderBanner>
         <OrderTitle>Thank you for your order</OrderTitle>
         <OrderConfirmation>
-          <h3>ORDER CONFIRMATION</h3>
-          <h4>{key}</h4>
+          <h3>ORDER CONFIRMED</h3>
         </OrderConfirmation>
         <CustomerInfo>
-          <h4>Order by: </h4>
-          <div>Name of Customer</div>
+          <h4>Order Summary: </h4>
         </CustomerInfo>
       </OrderBanner>
 
@@ -72,13 +69,13 @@ const ConfirmationPage = () => {
               return (
                 <CustomerItem key={item.name}>
                   <ProductName>{item.name}</ProductName>
-                  {item.qty > 1 && (
-                    <ProductQuantity>x {item.qty}</ProductQuantity>
-                  )}
+
                   <ProductPrice>{item.price}</ProductPrice>
+                  <ProductQuantity>x {item.qty}</ProductQuantity>
                 </CustomerItem>
               );
             })}
+            <Divider />
             <TotalPrice>
               <TotalPriceLbl>Total Price: </TotalPriceLbl>
               <TotalPriceQuote>${totalPrice.toFixed(2)} </TotalPriceQuote>
@@ -94,14 +91,26 @@ const TotalPrice = styled.div`
   display: flex;
   padding: 2%;
   justify-content: space-between;
+  align-items: center;
+
+  width: 90%;
 `;
 
 const TotalPriceLbl = styled.h4``;
 
-const TotalPriceQuote = styled.h4``;
+const TotalPriceQuote = styled.h4`
+  padding-right: 12px;
+`;
 
 const OrderTitle = styled.h2`
   padding: 2%;
+`;
+
+const Divider = styled.div`
+  height: 0;
+  width: 95%;
+  border-top: 1px solid #666;
+  margin: 0 auto;
 `;
 
 const CustomerItem = styled.div`
@@ -111,7 +120,7 @@ const CustomerItem = styled.div`
 `;
 
 const ProductName = styled.div`
-  width: 90%;
+  width: 80%;
 `;
 
 const ProductPrice = styled.div``;
@@ -136,6 +145,7 @@ const CustomerInfo = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2%;
+  margin-top: 15px;
 `;
 
 const OrderConfirmation = styled.div`
@@ -150,9 +160,9 @@ const OrderBanner = styled.div`
 `;
 
 const OrderSummary = styled.div`
-  margin-top: 2%;
-  width: 90%;
+  width: 65%;
   margin: 0 auto;
+  margin-top: 20px;
   border: 1px solid black;
   border-radius: 25px;
 `;

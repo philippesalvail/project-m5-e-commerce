@@ -48,17 +48,20 @@ const handleAllItems = (req, res) => {
 };
 
 const handleItemList = (req, res) => {
-  const itemIds = req.params.itemList;
+  const itemListParam = req.params.itemList;
   let itemList = [];
 
-  itemIdArr = itemIds.split(",");
+  itemsArr = itemListParam.split(",");
 
-  //console.log(itemIdArr);
+  //console.log(itemsArr);
 
-  itemIdArr.forEach((itemId) => {
-    if (itemId) {
-      let itemIdNum = Number(itemId);
+  itemsArr.forEach((item) => {
+    if (item) {
+      itemArray = item.split("-");
+      let itemIdNum = Number(itemArray[0]);
+      let itemQty = Number(itemArray[1]);
       let itemToAdd = items.find((item) => item._id === itemIdNum);
+      itemToAdd.qty = itemQty;
       itemList.push(itemToAdd);
     }
   });
