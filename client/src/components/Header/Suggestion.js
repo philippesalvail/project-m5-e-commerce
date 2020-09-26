@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const Suggestion = ({ product, input, isSelected, onClick, onMouseEnter }) => {
-  let cutIndex =
-    product.name.toLowerCase().search(input.toLowerCase()) + input.length;
+  let cutIndex = product.name.toLowerCase().search(input.toLowerCase());
 
-  const firstHalf = product.name.slice(0, cutIndex);
-  const secondHalf = product.name.slice(cutIndex);
+  const firstPart = product.name.slice(0, cutIndex);
+  const searchTerm = product.name.slice(cutIndex, cutIndex + input.length);
+  const lastPart = product.name.slice(cutIndex + input.length);
 
   return (
     <Wrapper
@@ -15,8 +15,9 @@ const Suggestion = ({ product, input, isSelected, onClick, onMouseEnter }) => {
       style={{ background: isSelected ? "lightyellow" : "white" }}
     >
       <span>
-        {firstHalf}
-        <Prediction>{secondHalf}</Prediction>
+        {firstPart}
+        <SearchTerm>{searchTerm}</SearchTerm>
+        {lastPart}
       </span>
     </Wrapper>
   );
@@ -29,7 +30,7 @@ const Wrapper = styled.li`
   background-color: white;
 `;
 
-const Prediction = styled.span`
+const SearchTerm = styled.span`
   font-weight: bold;
 `;
 

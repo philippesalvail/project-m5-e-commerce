@@ -82,7 +82,7 @@ const SearchBar = () => {
               setTimeout(() => {
                 setIsSuggestionsOpen(false);
                 setAlreadyCalled(false);
-              }, 100);
+              }, 200);
             }
           }}
           onKeyDown={(ev) => {
