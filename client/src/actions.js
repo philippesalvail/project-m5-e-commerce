@@ -91,3 +91,7 @@ export const purchaseCartItemsError = (error) => ({
 export const emptyCartError = () => ({
   type: "EMPTY_CART_ERROR",
 });
+
+export const clearEmptyCartError = () => ({
+  type: "CLEAR_EMPTY_CART_ERROR",
+});
