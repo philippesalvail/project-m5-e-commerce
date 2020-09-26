@@ -15,6 +15,13 @@ const NavBar = () => {
   const location = useLocation();
   //console.log(location.pathname);
 
+  if (location.pathname === "/") {
+    if (!currentCategory) {
+      dispatch(changeCategoryFilter("fitness"));
+    }
+  } else {
+    dispatch(changeCategoryFilter(""));
+  }
   return (
     <Wrapper>
       <div style={{ display: "flex" }}>
