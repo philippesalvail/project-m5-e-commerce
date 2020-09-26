@@ -19,7 +19,6 @@ function ProductDetails() {
   const companyDetails = useSelector((state) => state.product.currentCompany);
   const productPurchase = useSelector((state) => state.purchase);
   const similarItems = useSelector((state) => state.product.similarItems);
-  const loadingState = useSelector((state) => state.status);
   const [quantity, setQuantity] = React.useState(1);
   const dispatch = useDispatch();
 
@@ -46,6 +45,7 @@ function ProductDetails() {
         dispatch(receiveProductDetail(jsonObj));
       })
       .catch((err) => dispatch(receiveProductError(err)));
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [item]);
 
   return (
@@ -72,7 +72,7 @@ function ProductDetails() {
                   <Price>{productDetails.price}</Price>
                 </NameAndPrice>
                 <Item>
-                  {productDetails.numInStock === 0 ? (
+                  {productDetails.numInStock <= 0 ? (
                     <OutOfStockLbl>Out Of Stock</OutOfStockLbl>
                   ) : (
                     <QtyAndBackGround>
