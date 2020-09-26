@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
+import { IoIosCheckmarkCircle } from "react-icons/io";
+
 import {
   requestItemList,
   receiveItemList,
@@ -67,7 +69,8 @@ const ConfirmationPage = () => {
       <OrderBanner>
         <OrderTitle>Thank you for your order</OrderTitle>
         <OrderConfirmation>
-          <h3>ORDER CONFIRMED</h3>
+          <Checkmark />
+          <h4>ORDER CONFIRMED</h4>
         </OrderConfirmation>
         <CustomerInfo>
           <h4>Order Summary: </h4>
@@ -145,10 +148,6 @@ const CustomerPurchases = styled.div`
   flex: 2;
 `;
 
-const CustomerImg = styled.img`
-  flex: 1;
-`;
-
 const OrderDetails = styled.div`
   display: flex;
 `;
@@ -161,8 +160,15 @@ const CustomerInfo = styled.div`
 `;
 
 const OrderConfirmation = styled.div`
-  background-color: LightGreen;
-  padding: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Checkmark = styled(IoIosCheckmarkCircle)`
+  color: #93bd21;
+  font-size: 18px;
+  margin-right: 10px;
 `;
 
 const OrderBanner = styled.div`
@@ -172,11 +178,16 @@ const OrderBanner = styled.div`
 `;
 
 const OrderSummary = styled.div`
-  width: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30vw;
+  height: 75vh;
   margin: 0 auto;
   margin-top: 20px;
-  border: 1px solid black;
-  border-radius: 25px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  padding: 20px;
 `;
 
 export default ConfirmationPage;
