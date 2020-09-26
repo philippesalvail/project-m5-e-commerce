@@ -93,9 +93,6 @@ const ConfirmationPage = () => {
           <h4>Thank you for your order</h4>
         </OrderConfirmation>
         <OrderId>Order #: {`${orderId}`}</OrderId>
-        <CustomerInfo>
-          <h4> Summary: </h4>
-        </CustomerInfo>
       </OrderBanner>
 
       <CustomerInfo>
