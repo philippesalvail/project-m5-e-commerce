@@ -1,13 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { COLORS } from "../../constants";
 import { FiWind } from "react-icons/fi";
 
+import { changeCategoryFilter } from "../../actions";
 import CartButton from "./CartButton";
 import NavBar from "./NavBar";
 
 const Header = () => {
+  const { currentCategory } = useSelector((state) => state.items);
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  if (!currentCategory && location.pathname === "/") {
+    dispatch(changeCategoryFilter("fitness"));
+  }
+
   return (
     <Wrapper>
       <TopHeader>

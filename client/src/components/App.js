@@ -25,7 +25,7 @@ function App() {
           <Route exact path="/item/:itemId">
             <ProductDetails />
           </Route>
-          <Route exact path="/confirmationPage/:orderId">
+          <Route exact path="/confirmation-page/:orderId">
             <ConfirmationPage />
           </Route>
         </Switch>

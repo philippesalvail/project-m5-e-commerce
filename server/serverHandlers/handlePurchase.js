@@ -3,7 +3,9 @@ const { v4: uuidv4 } = require("uuid");
 
 const handlePurchase = (req, res) => {
   const purchaseArray = req.body;
-  const newOrderId = uuidv4();
+  let uuid = uuidv4();
+
+  newOrderId = uuid.slice(0, 13);
 
   let newOrder = {};
 

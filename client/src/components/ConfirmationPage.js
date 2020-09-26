@@ -67,13 +67,16 @@ const ConfirmationPage = () => {
   return (
     <OrderSummary>
       <OrderBanner>
-        <OrderTitle>Thank you for your order</OrderTitle>
-        <OrderConfirmation>
+        <OrderTitle>
           <Checkmark />
-          <h4>ORDER CONFIRMED</h4>
+          ORDER CONFIRMED{" "}
+        </OrderTitle>
+        <OrderConfirmation>
+          <h4>Thank you for your order</h4>
         </OrderConfirmation>
+        <OrderId>Order #: {`${orderId}`}</OrderId>
         <CustomerInfo>
-          <h4>Order Summary: </h4>
+          <h4> Summary: </h4>
         </CustomerInfo>
       </OrderBanner>
 
@@ -119,6 +122,11 @@ const TotalPriceQuote = styled.h4`
 
 const OrderTitle = styled.h2`
   padding: 2%;
+`;
+
+const OrderId = styled.p`
+  font-weight: 200;
+  margin-top: 10px;
 `;
 
 const Divider = styled.div`
