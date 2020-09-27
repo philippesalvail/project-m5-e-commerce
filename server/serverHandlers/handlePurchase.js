@@ -19,10 +19,11 @@ const handlePurchase = (req, res) => {
         if (element.numInStock < quantity) {
           error = true;
           res.status(400).send({
-            error: `There isn't ${quantity} items of this product in stock`,
+            error: `Not enough items in stock`,
           });
         }
       }
+
       if (!error) {
         element.numInStock -= quantity;
         newOrder[id] = quantity;

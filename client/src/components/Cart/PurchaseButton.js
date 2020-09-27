@@ -10,7 +10,7 @@ import {
   purchaseCartItemsError,
   clearCart,
   emptyCartError,
-  clearEmptyCartError,
+  clearError,
 } from "../../actions";
 
 const PurchaseButton = ({ cartItems }) => {
@@ -44,16 +44,15 @@ const PurchaseButton = ({ cartItems }) => {
             history.push(`/confirmation-page/${data.orderId}`);
           } else {
             dispatch(purchaseCartItemsError(data.error));
+            window.setTimeout(() => {
+              dispatch(clearError());
+            }, 4000);
           }
         });
-      // .catch((error) => {
-      //   console.error("Error:", error);
-      //   dispatch(purchaseCartItemsError(error));
-      // });
     } else {
       dispatch(emptyCartError());
       window.setTimeout(() => {
-        dispatch(clearEmptyCartError());
+        dispatch(clearError());
       }, 4000);
     }
   };
@@ -101,12 +100,13 @@ const ErrorBanner = styled.div`
   align-items: center;
   text-align: center;
   margin-top: 15px;
-  padding: 15px;
+  padding: 10px;
   background: ${COLORS.warning};
   color: white;
   width: 150px;
   height: 40px;
   border-radius: 4px;
+  font-size: 14px;
 `;
 
 export default PurchaseButton;

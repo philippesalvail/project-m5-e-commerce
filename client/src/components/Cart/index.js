@@ -9,8 +9,7 @@ import { getCartItemArray } from "../../reducers/cartReducer";
 
 const Cart = () => {
   const cartItems = useSelector(getCartItemArray);
-  const { status, error } = useSelector((state) => state.purchase);
-  const dispatch = useDispatch();
+  const { status } = useSelector((state) => state.purchase);
 
   let totalItems = 0;
 

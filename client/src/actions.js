@@ -92,8 +92,8 @@ export const emptyCartError = () => ({
   type: "EMPTY_CART_ERROR",
 });
 
-export const clearEmptyCartError = () => ({
-  type: "CLEAR_EMPTY_CART_ERROR",
+export const clearError = () => ({
+  type: "CLEAR_ERROR",
 });
 
 // ORDER REQUEST ACTIONS
