@@ -2,10 +2,8 @@ const { companies, items } = require("../dataTest");
 
 const handleSearchItems = (req, res) => {
   const searchInput = req.params.input.toLowerCase();
-  console.log("searchInput", searchInput);
 
   if (!searchInput) {
-    console.log("oops search input", searchInput);
     res.status(400).send({ Error: "bad request" });
     return;
   }
@@ -19,12 +17,9 @@ const handleSearchItems = (req, res) => {
   });
 
   if (matchingItemsArray.length === 0) {
-    console.log("no matches", searchInput);
     res.status(200).send({ Error: "No Match Found" });
     return;
   }
-
-  //   console.log(matchingItemsArray.length);
 
   const delay = Math.random() * 1250 + 500;
   setTimeout(() => {

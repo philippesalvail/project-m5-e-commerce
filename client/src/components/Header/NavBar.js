@@ -13,7 +13,6 @@ const NavBar = () => {
   const { currentCategory } = useSelector((state) => state.items);
 
   const location = useLocation();
-  //console.log(location.pathname);
 
   React.useEffect(() => {
     if (location.pathname === "/") {

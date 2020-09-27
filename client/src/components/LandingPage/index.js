@@ -18,8 +18,6 @@ const LandingPage = () => {
     (state) => state.items
   );
 
-  // console.log(currentCategory);
-
   React.useEffect(() => {
     const fetchUrl =
       currentCategory === "search"

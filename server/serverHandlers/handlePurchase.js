@@ -30,10 +30,9 @@ const handlePurchase = (req, res) => {
       }
     });
   });
-  // console.log(newOrderId, newOrder);
+
   if (!error) {
     orders[newOrderId] = newOrder;
-    console.log(orders);
 
     const delay = Math.random() * 1250 + 500;
     setTimeout(() => {

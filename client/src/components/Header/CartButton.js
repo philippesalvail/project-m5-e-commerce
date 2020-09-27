@@ -23,7 +23,6 @@ const CartButton = () => {
     badgeContent = String(numItems);
   }
 
-  // console.log(badgeContent);
   return (
     <Wrapper to={"/cart"}>
       <IconContext.Provider value={{ size: "35px" }}>

@@ -8,7 +8,6 @@ const initialState = {
 export default function purchaseReducer(state = initialState, action) {
   switch (action.type) {
     case "PURCHASE_CART_ITEMS_REQUEST":
-      //console.log(action.totalPrice);
       return produce(state, (draftState) => {
         draftState.status = "loading";
       });
