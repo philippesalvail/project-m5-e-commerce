@@ -1,19 +1,25 @@
 import React from "react";
 import ListItem from "../LandingPage/ListItem";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const SimilarItemsDisplay = ({ similarItems }) => {
-  let itemsChosen = [];
+  const location = useLocation();
+  const [itemsChosen, setItemsChosen] = React.useState([]);
 
-  console.log("similarItems: ", similarItems);
+  //console.log("setSimilarItems: ", similarItems);
+  React.useEffect(() => {
+    let tempArray = [];
+    for (let i = 0; i < 3 && i < similarItems.length; i++) {
+      let select =
+        similarItems[Math.floor(Math.random() * similarItems.length)];
 
-  for (let i = 0; i < 3 && i < similarItems.length; i++) {
-    let select = similarItems[Math.floor(Math.random() * similarItems.length)];
-
-    if (!itemsChosen.includes(select)) {
-      itemsChosen.push(select);
+      if (!tempArray.includes(select)) {
+        tempArray.push(select);
+      }
     }
-  }
+    setItemsChosen(tempArray);
+  }, [location.pathname]);
 
   return (
     <Wrapper>
@@ -22,8 +28,8 @@ const SimilarItemsDisplay = ({ similarItems }) => {
         <Bottom>
           <Display>
             {itemsChosen.map((item) => {
-              console.log("item: ", item);
-              return <ListItem key={item._id} item={item} />;
+              //console.log("item: ", item);
+              return <ListItem key={`suggested-${item._id}`} item={item} />;
             })}
           </Display>
         </Bottom>

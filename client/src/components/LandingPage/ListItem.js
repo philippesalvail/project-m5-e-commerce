@@ -12,7 +12,7 @@ const ListItem = ({ item }) => {
         <ItemImage src={item.imageSrc} alt={item.name} />
         <ItemName>{item.name}</ItemName>
       </CardLink>
-      {item.numInStock === 0 ? (
+      {item.numInStock <= 0 ? (
         <Error>Out of Stock</Error>
       ) : (
         <>

@@ -23,8 +23,11 @@ const handlePurchase = (req, res) => {
           });
         }
       }
-      if (element.numInStock > 0) element.numInStock -= quantity;
-      newOrder[id] = quantity;
+
+      if (!error) {
+        element.numInStock -= quantity;
+        newOrder[id] = quantity;
+      }
     });
   });
   // console.log(newOrderId, newOrder);

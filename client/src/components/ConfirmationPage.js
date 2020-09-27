@@ -27,10 +27,9 @@ const ConfirmationPage = () => {
 
   const orderId = useParams().orderId;
 
-  let itemIds = "";
-
   //console.log(orderId);
   React.useEffect(() => {
+    let itemIds = "";
     dispatch(requestOrderId());
     fetch(`/order/${orderId}`)
       .then((res) => res.json())
@@ -94,10 +93,6 @@ const ConfirmationPage = () => {
           <h4>Thank you for your order</h4>
         </OrderConfirmation>
         <OrderId>Order #: {`${orderId}`}</OrderId>
-        <CustomerInfo>
-          <h4> Summary: </h4>
-        </CustomerInfo>
-
       </OrderBanner>
 
       <CustomerInfo>
