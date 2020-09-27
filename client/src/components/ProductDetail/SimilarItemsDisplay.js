@@ -7,7 +7,6 @@ const SimilarItemsDisplay = ({ similarItems }) => {
   const location = useLocation();
   const [itemsChosen, setItemsChosen] = React.useState([]);
 
-  //console.log("setSimilarItems: ", similarItems);
   React.useEffect(() => {
     let tempArray = [];
     for (let i = 0; i < 3 && i < similarItems.length; i++) {
@@ -28,7 +27,6 @@ const SimilarItemsDisplay = ({ similarItems }) => {
         <Bottom>
           <Display>
             {itemsChosen.map((item) => {
-              //console.log("item: ", item);
               return <ListItem key={`suggested-${item._id}`} item={item} />;
             })}
           </Display>

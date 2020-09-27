@@ -27,7 +27,6 @@ const ConfirmationPage = () => {
 
   const orderId = useParams().orderId;
 
-  //console.log(orderId);
   React.useEffect(() => {
     let itemIds = "";
     dispatch(requestOrderId());
@@ -41,7 +40,6 @@ const ConfirmationPage = () => {
             itemIds += `${itemId}-${itemQty[index]},`;
           });
           dispatch(receiveOrderId());
-          console.log(itemIds);
         } else {
           dispatch(receiveOrderError(data.error));
           return;
@@ -49,7 +47,6 @@ const ConfirmationPage = () => {
       })
       .then(() => {
         dispatch(requestItemList());
-        console.log(error);
         if (status !== "error") {
           fetch(`/items/list/${itemIds}`)
             .then((res) => res.json())
