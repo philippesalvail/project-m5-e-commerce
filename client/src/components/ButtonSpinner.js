@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { GrNodes } from "react-icons/gr";
+import { ImSpinner3 } from "react-icons/im";
+import { COLORS } from "../constants";
 
 const ButtonSpinner = () => {
   return (
@@ -20,10 +21,9 @@ from {
 }
 `;
 
-const Rotate = styled(GrNodes)`
+const Rotate = styled(ImSpinner3)`
   animation: ${rotate} 2s linear infinite;
   font-size: 20px;
-  color: white;
 `;
 
 const CartButton = styled.div`
@@ -31,14 +31,16 @@ const CartButton = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-  background: #e1ad01;
+  background: ${COLORS.yellow};
   color: white;
   border: none;
-  padding: 10px;
-  font-size: 16px;
+  margin-top: 28px;
+  padding: 4px;
+  font-size: 10px;
   font-weight: 600;
   cursor: pointer;
-  width: 70%;
+  width: 50%;
+  min-height: 45px;
   text-transform: uppercase;
 `;
 
