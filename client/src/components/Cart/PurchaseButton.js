@@ -10,25 +10,8 @@ import {
   purchaseCartItemsError,
   clearCart,
   emptyCartError,
-  clearEmptyCartError,
+  clearError,
 } from "../../actions";
-
-const calculateTotalPrice = (arr) => {
-  let totalPrice = 0;
-
-  if (arr.length > 0) {
-    arr.forEach((item) => {
-      const itemPrice = Number(item.price.replace(/[^0-9.-]+/g, "")) * 100;
-
-      if (item.quantity) {
-        totalPrice += itemPrice * item.quantity;
-      } else {
-        totalPrice += itemPrice;
-      }
-    });
-  }
-  return totalPrice.toFixed(2) / 100;
-};
 
 const PurchaseButton = ({ cartItems }) => {
   const history = useHistory();
@@ -61,16 +44,15 @@ const PurchaseButton = ({ cartItems }) => {
             history.push(`/confirmation-page/${data.orderId}`);
           } else {
             dispatch(purchaseCartItemsError(data.error));
+            window.setTimeout(() => {
+              dispatch(clearError());
+            }, 4000);
           }
         });
-      // .catch((error) => {
-      //   console.error("Error:", error);
-      //   dispatch(purchaseCartItemsError(error));
-      // });
     } else {
       dispatch(emptyCartError());
       window.setTimeout(() => {
-        dispatch(clearEmptyCartError());
+        dispatch(clearError());
       }, 4000);
     }
   };
@@ -118,12 +100,13 @@ const ErrorBanner = styled.div`
   align-items: center;
   text-align: center;
   margin-top: 15px;
-  padding: 15px;
+  padding: 10px;
   background: ${COLORS.warning};
   color: white;
   width: 150px;
   height: 40px;
   border-radius: 4px;
+  font-size: 14px;
 `;
 
 export default PurchaseButton;
